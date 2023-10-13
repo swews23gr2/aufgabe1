@@ -1,31 +1,14 @@
-/*
- * Copyright (C) 2020 - present Juergen Zimmermann, Hochschule Karlsruhe
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
-
 /**
  * Das Modul enthält die Konfiguration für den Zugriff auf die DB.
  * @packageDocumentation
  */
 import { BASEDIR, config } from './app.js';
-import { Buch } from '../buch/entity/buch.entity.js';
 import { type DataSourceOptions } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+import { Student } from '../student/entity/student.entity.js';
 import { type TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { dbType } from './dbtype.js';
-import { entities } from '../buch/entity/entities.js';
+import { entities } from '../student/entity/entities.js';
 import { loggerDefaultValue } from './logger.js';
 import { nodeConfig } from './node.js';
 import { readFileSync } from 'node:fs';
@@ -34,11 +17,11 @@ import { resolve } from 'node:path';
 const { db } = config;
 
 // nullish coalescing
-const database = (db?.name as string | undefined) ?? Buch.name.toLowerCase();
+const database = (db?.name as string | undefined) ?? Student.name.toLowerCase();
 
 const host = (db?.host as string | undefined) ?? 'localhost';
 const username =
-    (db?.username as string | undefined) ?? Buch.name.toLowerCase();
+    (db?.username as string | undefined) ?? Student.name.toLowerCase();
 const pass = (db?.password as string | undefined) ?? 'p';
 const passAdmin = (db?.passwordAdmin as string | undefined) ?? 'p';
 
