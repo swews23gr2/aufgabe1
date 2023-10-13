@@ -1,0 +1,27 @@
+services:
+  db:
+    image: postgres:16.0-bookworm
+    hostname: postgres-db
+    container_name: student-database
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    environment:
+      - "POSTGRES_USER=student"
+      - "POSTGRES_PASSWORD=p"
+      #- "POSTGRES_DB=student"
+      - TZ=Europe/Berlin
+      - PGTZ=Europe/Berlin
+      #- POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - type: bind
+        source: C:/Zimmermann/volumes/postgres/csv/student
+        target: /csv
+        read_only: true
+      - type: bind
+        source: C:/Zimmermann/volumes/postgres/sql
+        target: /sql
+        read_only: true
+      - type: bind
+        source: C:/Zimmermann/volumes/postgres/tablespace
+        target: /var/lib/postgresql/tablespace
