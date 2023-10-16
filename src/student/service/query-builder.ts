@@ -1,3 +1,8 @@
+/**
+ * Das Modul besteht aus der Klasse {@linkcode QueryBuilder}.
+ * @packageDocumentation
+ */
+
 import { Adresse } from '../entity/adresse.entity.js';
 import { Fach } from '../entity/fach.entity.js';
 import { InjectRepository } from '@nestjs/typeorm';

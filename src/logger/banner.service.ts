@@ -1,3 +1,8 @@
+/**
+ * Das Modul enthält die Funktion, um die Test-DB neu zu laden.
+ * @packageDocumentation
+ */
+
 import { Injectable, type OnApplicationBootstrap } from '@nestjs/common';
 import { release, type, userInfo } from 'node:os';
 import { dbType } from '../config/dbtype.js';
@@ -7,10 +12,16 @@ import { hash } from 'argon2';
 import { nodeConfig } from '../config/node.js';
 import process from 'node:process';
 
+/**
+ * Beim Start ein Banner ausgeben durch `onApplicationBootstrap()`.
+ */
 @Injectable()
 export class BannerService implements OnApplicationBootstrap {
     readonly #logger = getLogger(BannerService.name);
 
+    /**
+     * Die Test-DB wird im Development-Modus neu geladen.
+     */
     async onApplicationBootstrap() {
         const { host, nodeEnv, port } = nodeConfig;
         figlet('Student Gruppe 2', (_, data) => console.info(data));

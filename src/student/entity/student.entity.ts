@@ -19,12 +19,12 @@ import {
 } from 'typeorm';
 
 /**
- * Alias-Typ für gültige Strings beiM Abschluss eines Studenten.
+ * Alias-Typ für gültige Strings beim Abschluss eines Studenten.
  */
 export type Abschluss = 'BACHELOR' | 'MASTER';
 
 /**
- * Entity-Klasse zu einem relationalen Tabelle
+ * Entity-Klasse zu einer relationalen Tabelle
  */
 @Entity()
 export class Student {

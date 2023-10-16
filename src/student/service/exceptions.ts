@@ -1,15 +1,27 @@
 // eslint-disable-next-line max-classes-per-file
 import { HttpException, HttpStatus } from '@nestjs/common';
 
-export class IsbnExistsException extends HttpException {
-    constructor(readonly isbn: string) {
+/**
+ * Das Modul besteht aus den Klassen für die Fehlerbehandlung bei der Verwaltung
+ * von Studenten, z.B. beim DB-Zugriff.
+ * @packageDocumentation
+ */
+
+/**
+ * Exception-Klasse für eine bereits existierende Matrikelnummer.
+ */
+export class MatrikelExistsException extends HttpException {
+    constructor(readonly matrikel: string) {
         super(
-            `Die ISBN-Nummer ${isbn} existiert bereits.`,
+            `Die Matrikelnummer ${matrikel} existiert bereits.`,
             HttpStatus.UNPROCESSABLE_ENTITY,
         );
     }
 }
 
+/**
+ * Exception-Klasse für eine ungültige Versionsnummer beim Ändern.
+ */
 export class VersionInvalidException extends HttpException {
     constructor(readonly version: string | undefined) {
         super(
@@ -19,6 +31,9 @@ export class VersionInvalidException extends HttpException {
     }
 }
 
+/**
+ * Exception-Klasse für eine veraltete Versionsnummer beim Ändern.
+ */
 export class VersionOutdatedException extends HttpException {
     constructor(readonly version: number) {
         super(

@@ -1,10 +1,18 @@
+/**
+ * Das Modul besteht aus der Klasse {@linkcode MailService} für das
+ * Verschicken von E-Mails.
+ * @packageDocumentation
+ */
 import { Injectable } from '@nestjs/common';
 import { type SendMailOptions } from 'nodemailer';
 import { getLogger } from '../logger/logger.js';
 import { mailConfig } from '../config/mail.js';
 
+/** Typdefinition für das Senden einer E-Mail. */
 export interface SendMailParams {
+    /** Subject für die E-Mail. */
     readonly subject: string;
+    /** Body für die E-Mail. */
     readonly body: string;
 }
 

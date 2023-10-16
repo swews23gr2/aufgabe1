@@ -11,6 +11,11 @@ import { Temporal } from '@js-temporal/polyfill';
 import { getLogger } from './logger.js';
 import { tap } from 'rxjs/operators';
 
+/**
+ * `ResponseTimeInterceptor` protokolliert die Antwortzeit und den Statuscode
+ * Alternative zu morgan (von Express) http://expressjs.com/en/resources/middleware/morgan.html,
+ * aber mit konformem Log-Layout.
+ */
 @Injectable()
 export class ResponseTimeInterceptor implements NestInterceptor {
     readonly #logger = getLogger(ResponseTimeInterceptor.name);

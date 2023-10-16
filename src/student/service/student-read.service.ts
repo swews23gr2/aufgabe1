@@ -1,11 +1,21 @@
+/**
+ * Das Modul besteht aus der Klasse {@linkcode StudentReadService}.
+ * @packageDocumentation
+ */
+
 import { type Abschluss, Student } from '../entity/student.entity.js';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { QueryBuilder } from './query-builder.js';
 import RE2 from 're2';
 import { getLogger } from '../../logger/logger.js';
 
+/**
+ * Typdefinition für `findById`
+ */
 export interface FindByIdParams {
+    /** ID des gesuchten Studenten */
     readonly id: number;
+    /** Sollen die Fächer mitgeladen werden? */
     readonly mitFaechern?: boolean;
 }
 export interface Suchkriterien {
@@ -18,6 +28,10 @@ export interface Suchkriterien {
     readonly homepage?: string;
 }
 
+/**
+ * Die Klasse `StudentReadService` implementiert das Lesen für Studenten und greift
+ * mit _TypeORM_ auf eine relationale DB zu.
+ */
 @Injectable()
 export class StudentReadService {
     static readonly ID_PATTERN = new RE2('^[1-9][\\d]*$');
@@ -34,6 +48,13 @@ export class StudentReadService {
         this.#queryBuilder = queryBuilder;
     }
 
+    /**
+     * Einen Studenten asynchron anhand seiner ID suchen
+     * @param id ID des gesuchten Studenten
+     * @returns Der gefundene Student vom Typ [Student](student_entity_student_entity.Student.html)
+     *          in einem Promise aus ES2015.
+     * @throws NotFoundException falls kein Student mit der ID existiert
+     */
     async findById({
         id,
         mitFaechern = false,
@@ -62,10 +83,16 @@ export class StudentReadService {
         return student;
     }
 
+    /**
+     * Studenten asynchron suchen.
+     * @param suchkriterien JSON-Objekt mit Suchkriterien
+     * @returns Ein JSON-Array mit den gefundenen Studenten.
+     * @throws NotFoundException falls keine Studenten gefunden wurden.
+     */
     async find(suchkriterien?: Suchkriterien) {
         this.#logger.debug('find: suchkriterien=%o', suchkriterien);
 
-        // Keine Suchkriterien?
+        // Keine Suchkriterien
         if (suchkriterien === undefined) {
             return this.#queryBuilder.build({}).getMany();
         }
@@ -74,6 +101,7 @@ export class StudentReadService {
             return this.#queryBuilder.build(suchkriterien).getMany();
         }
 
+        // Ungültige Suchkriterien
         if (!this.#checkKeys(keys)) {
             throw new NotFoundException('Ungueltige Suchkriterien');
         }

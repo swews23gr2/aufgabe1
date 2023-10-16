@@ -11,6 +11,16 @@ import { StudentWriteService } from './service/student-write.service.js';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { entities } from './entity/entities.js';
 
+/**
+ * Das Modul besteht aus Controller- und Service-Klassen für die Verwaltung von
+ * Studenten.
+ * @packageDocumentation
+ */
+
+/**
+ * Die dekorierte Modul-Klasse mit Controller- und Service-Klassen sowie der
+ * Funktionalität für TypeORM.
+ */
 @Module({
     //imports: [MailModule, TypeOrmModule.forFeature(entities), AuthModule],
     imports: [MailModule, TypeOrmModule.forFeature(entities)],
