@@ -1,28 +1,29 @@
 CREATE TABLE student (
     id SERIAL PRIMARY KEY,
-    version INT,
-    vorname VARCHAR(255),
-    nachname VARCHAR(255),
-    geburstdatum TIMESTAMP,
-    matrikel INT,
-    email VARCHAR(255),
-    studienfach VARCHAR(255),
-    abschluss VARCHAR(255),
-    homepage VARCHAR(255),
-    erzeugt TIMESTAMP,
-    aktualisiert TIMESTAMP
+    version integer NOT NULL DEFAULT 0,
+    vorname varchar(255),
+    nachname varchar(255),
+    geburstdatum timestamp,
+    matrikel integer NOT NULL UNIQUE,
+    email varchar(255),
+    studienfach varchar(255),
+    abschluss varchar(255),
+    homepage varchar(255),
+    erzeugt timestamp NOT NULL DEFAULT NOW(),
+    aktualisiert timestamp NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE fach (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255),
-    abkuerzung VARCHAR(255),
-    student_id INT REFERENCES student(id)
+    name varchar(255),
+    abkuerzung varchar(255),
+    student_id integer REFERENCES student(id)
 );
 
 CREATE TABLE adresse (
     id SERIAL PRIMARY KEY,
-    ort VARCHAR(255),
-    plz VARCHAR(10),
-    land VARCHAR(50)
+    ort varchar(255),
+    plz varchar(10),
+    land varchar(50),
+    student_id integer NOT NULL UNIQUE REFERENCES student(id)
 );
