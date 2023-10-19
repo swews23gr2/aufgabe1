@@ -26,6 +26,7 @@ export interface Suchkriterien {
     readonly studienfach?: string;
     readonly abschluss?: Abschluss;
     readonly homepage?: string;
+    readonly adresse?: string;
 }
 
 /**
