@@ -195,7 +195,7 @@ export class StudentWriteController {
      * Ein Student wird anhand seiner ID-gelöscht, die als Pfad-Parameter angegeben
      * ist. Der zurückgelieferte Statuscode ist `204` (`No Content`).
      *
-     * @param id Pfad-Paramater für die ID.
+     * @param id Pfad-Parameter für die ID.
      * @returns Leeres Promise-Objekt.
      */
     @Delete(':id')
