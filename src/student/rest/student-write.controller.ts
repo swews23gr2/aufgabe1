@@ -196,7 +196,6 @@ export class StudentWriteController {
      * ist. Der zurückgelieferte Statuscode ist `204` (`No Content`).
      *
      * @param id Pfad-Paramater für die ID.
-     * @param res Leeres Response-Objekt von Express.
      * @returns Leeres Promise-Objekt.
      */
     @Delete(':id')
