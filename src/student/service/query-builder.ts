@@ -56,13 +56,13 @@ export class QueryBuilder {
         return queryBuilder;
     }
 
-    build({ abschluss, ...props }: Suchkriterien) {
-        this.#logger.debug('build: abschluss=%s, props=%o', abschluss, props);
+    build({ adresse, ...props }: Suchkriterien) {
+        this.#logger.debug('build: adresse=%s, props=%o', adresse, props);
 
         let queryBuilder = this.#repo.createQueryBuilder(this.#studentAlias);
         queryBuilder.innerJoinAndSelect(
-            `${this.#studentAlias}.abschluss`,
-            'abschluss',
+            `${this.#studentAlias}.adresse`,
+            'adresse',
         );
 
         // type-coverage:ignore-next-line
@@ -70,12 +70,12 @@ export class QueryBuilder {
         let useWhere = true;
 
         // type-coverage:ignore-next-line
-        if (abschluss !== undefined) {
+        if (adresse !== undefined) {
             const ilike =
                 typeOrmModuleOptions.type === 'postgres' ? 'ilike' : 'like';
             queryBuilder = queryBuilder.where(
-                `${this.#adresseAlias}.abschluss ${ilike} :abschluss`,
-                { abschluss: `%${abschluss}%` },
+                `${this.#adresseAlias}.adresse ${ilike} :adresse`,
+                { adresse: `%${adresse}%` },
             );
             useWhere = false;
         }
