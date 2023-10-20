@@ -24,7 +24,7 @@ pipeline {
     agent {
         docker {
             // https://www.debian.org/releases: Bookworm = Debian 12
-            image 'node:20.7.0-bookworm'
+            image 'node:20.8.0-bookworm'
             // https://stackoverflow.com/questions/62330354/jenkins-pipeline-alpine-agent-apk-update-error-unable-to-lock-database-permis
             // https://stackoverflow.com/questions/42630894/jenkins-docker-how-to-control-docker-user-when-using-image-inside-command/51986870#51986870
             // https://stackoverflow.com/questions/42743201/npm-install-fails-in-jenkins-pipeline-in-docker
@@ -105,7 +105,7 @@ pipeline {
                 // https://linuxhint.com/install-python-debian-10
                 // https://computingforgeeks.com/how-to-install-python-on-debian-linux
                 sh 'apt-get install --no-install-recommends --yes --show-progress gcc=4:12.2.0-3 g++=4:12.2.0-3 make=4.3-4.1 python3.11-minimal=3.11.2-6'
-                sh 'apt-get install --no-install-recommends --yes --show-progress ca-certificates=20230311 curl=7.88.1-10+deb12u1 gnupg=2.2.40-1.1'
+                sh 'apt-get install --no-install-recommends --yes --show-progress ca-certificates=20230311 curl=7.88.1-10+deb12u4 gnupg=2.2.40-1.1'
                 sh 'apt-get update --yes'
                 sh 'apt-get upgrade --yes'
                 sh 'python3 --version'

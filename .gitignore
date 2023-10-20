@@ -8,7 +8,7 @@
 
 # Generierte Dateien
 build
-.extras/doc/entwicklerhandbuch/html/*
+.extras/doc/projekthandbuch/html/*
 .extras/doc/folien/*.html
 .extras/doc/api/*
 .extras/doc/dependency-check/*
@@ -20,6 +20,7 @@ src/config/resources/jwt/private-key.pem
 src/config/resources/tls/private-key.pem
 
 # Logs
+log
 logs
 *.log
 npm-debug.log*
