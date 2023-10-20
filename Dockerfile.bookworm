@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-# Aufruf:   docker build --sbom true --tag --tag swews23gr2/student:2023.10.0-bookworm --file Dockerfile.bookworm .
+# Aufruf:   docker build --sbom true --tag swews23gr2/student:2023.10.0-bookworm --file Dockerfile.bookworm .
 #               ggf. --progress=plain
 #               ggf. --no-cache
 #           Get-Content Dockerfile | docker run --rm --interactive hadolint/hadolint:2.12.1-beta-debian
@@ -122,7 +122,7 @@ WORKDIR /opt/app
 
 USER node
 
-COPY --chown=node:node package.json .env ./
+COPY --chown=node:node package.json .env.STUDENT ./
 COPY --from=deps --chown=node:node /home/node/node_modules ./node_modules
 COPY --from=builder --chown=node:node /home/node/dist ./dist
 COPY --chown=node:node src/config/resources ./dist/config/resources
