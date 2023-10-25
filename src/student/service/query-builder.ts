@@ -70,12 +70,12 @@ export class QueryBuilder {
         let useWhere = true;
 
         // type-coverage:ignore-next-line
-        if (adresse !== undefined) {
+        if (abschluss !== undefined) {
             const ilike =
                 typeOrmModuleOptions.type === 'postgres' ? 'ilike' : 'like';
             queryBuilder = queryBuilder.where(
-                `${this.#adresseAlias}.adresse ${ilike} :adresse`,
-                { adresse: `%${adresse}%` },
+                `${this.#adresseAlias}.abschluss ${ilike} :abschluss`,
+                { abschluss: `%${abschluss}%` },
             );
             useWhere = false;
         }

@@ -8,6 +8,7 @@ import { AppModule } from './app.module.js';
 import { NestFactory } from '@nestjs/core';
 //import compression from 'compression';
 import { corsOptions } from './config/cors.options.js';
+// TODO: Security muss noch implementiert werden!
 //import { helmetHandlers } from './security/http/helmet.handler.js';
 import { nodeConfig } from './config/node.js';
 import { paths } from './config/paths.js';
