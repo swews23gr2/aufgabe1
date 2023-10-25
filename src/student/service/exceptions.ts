@@ -11,9 +11,21 @@ import { HttpException, HttpStatus } from '@nestjs/common';
  * Exception-Klasse für eine bereits existierende Matrikelnummer.
  */
 export class MatrikelExistsException extends HttpException {
-    constructor(readonly matrikel: string) {
+    constructor(readonly matrikel: number) {
         super(
             `Die Matrikelnummer ${matrikel} existiert bereits.`,
+            HttpStatus.UNPROCESSABLE_ENTITY,
+        );
+    }
+}
+
+/**
+ * Exception-Klasse für eine bereits existierende E-Mail-Adresse.
+ */
+export class EmailExistsException extends HttpException {
+    constructor(readonly email: string) {
+        super(
+            `Die E-Mail-Adresse ${email} existiert bereits.`,
             HttpStatus.UNPROCESSABLE_ENTITY,
         );
     }
