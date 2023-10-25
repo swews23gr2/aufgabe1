@@ -1,19 +1,40 @@
+# ----------------------------------------------------------------------------
+# p o s t g r e s
+# ----------------------------------------------------------------------------
 services:
   db:
     image: postgres:16.0-bookworm
-    hostname: postgres-db
-    container_name: student-database
     ports:
-      - "5432:5432"
+      - published: 5432
+        target: 5432
     restart: unless-stopped
-    environment:
-      - "POSTGRES_USER=student"
-      - "POSTGRES_PASSWORD=p"
-      #- "POSTGRES_DB=student"
-      - TZ=Europe/Berlin
-      - PGTZ=Europe/Berlin
-      #- POSTGRES_HOST_AUTH_METHOD=trust
+    # command:
+    #   - 'postgres'
+    #   - '-c'
+    #   - 'ssl=on'
+    #   - '-c'
+    #   - 'ssl_cert_file=/var/lib/postgresql/certificate.cer'
+    #   - '-c'
+    #   - 'ssl_key_file=/var/lib/postgresql/private-key.pem'
     volumes:
+      - type: bind
+        source: C:/Zimmermann/volumes/postgres/data
+        target: /var/lib/postgresql/data
+      - type: bind
+        source: C:/Zimmermann/volumes/postgres/postgresql.conf
+        target: /etc/postgresql/postgresql.conf
+        read_only: true
+      - type: bind
+        source: C:/Zimmermann/volumes/postgres/tablespace
+        target: /var/lib/postgresql/tablespace
+      - type: bind
+        source: C:/Zimmermann/volumes/postgres/tls/private-key.pem
+        target: /var/lib/postgresql/private-key.pem
+        # read_only: true
+      - type: bind
+        source: C:/Zimmermann/volumes/postgres/tls/certificate.cer
+        target: /var/lib/postgresql/certificate.cer
+        # read_only: true
       - type: bind
         source: C:/Zimmermann/volumes/postgres/csv/student
         target: /csv
@@ -22,23 +43,40 @@ services:
         source: C:/Zimmermann/volumes/postgres/sql
         target: /sql
         read_only: true
-      - type: bind
-        source: C:/Zimmermann/volumes/postgres/tablespace
-        target: /var/lib/postgresql/tablespace
+    env_file: postgres.env
+    # user: 'postgres:postgres'
+    # security_opt:
+    #   - label:user:postgres
+    #   - no-new-privileges:true
+    hostname: postgres
+    container_name: postgres
+    healthcheck:
+      test: [CMD, pg_isready, --dbname=postgres, --username=postgres]
+      interval: 5s
+      timeout: 2s
+      start_period: 5s
+    # cap_drop: [ALL]
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2G
+        reservations:
+          cpus: '1.0'
+          memory: 512M
 
   # ----------------------------------------------------------------------------
   # p g a d m i n
   # ----------------------------------------------------------------------------
   # http://localhost:8888 mit Emailadresse "pgadmin@acme.com" und Passwort "p"
   pgadmin:
-    image: dpage/pgadmin4:7.7
+    image: dpage/pgadmin4:7.8
     ports:
       - published: 8888
         target: 80
     volumes:
       - type: bind
         source: C:/Zimmermann/volumes/postgres/pgadmin
-        # https://www.pgadmin.org/docs/pgadmin4/latest/container_deployment.html
         target: /var/lib/pgadmin
       - type: bind
         source: C:/Zimmermann/volumes/postgres/pgadmin4
@@ -47,14 +85,7 @@ services:
     user: 'pgadmin:5050'
     hostname: pgadmin
     container_name: pgadmin
-    # https://docs.docker.com/compose/compose-file/compose-file-v3/#cap_add-cap_drop
     cap_drop: [ALL]
-    # https://man7.org/linux/man-pages/man7/capabilities.7.html
-    # setgid
-    # find '/var/lib/...'
-    # find '/var/spool/...'
-    # /venv/bin/python3
-    # /venv/bin/gunicorn
     cap_add: [CHOWN, SETGID, SETUID, DAC_OVERRIDE, NET_BIND_SERVICE]
     deploy:
       resources:
