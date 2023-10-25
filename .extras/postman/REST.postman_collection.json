@@ -1390,7 +1390,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"vorname\": \"Email\",\r\n  \"nachname\": \"Vorhanden\",\r\n  \"geburstdatum\": \"2000-01-01\",\r\n  \"matrikel\": \"62344\",\r\n  \"email\": \"jane.doe@post.rest\",\r\n  \"studienfach\": \"WIIB\",\r\n  \"abschluss\": \"BACHELOR\",\r\n  \"homepage\": \"https://post.rest\",\r\n  \"adresse\": {\r\n    \"ort\": \"POSTOrt\",\r\n    \"plz\": \"123\",\r\n    \"land\": \"USA\"\r\n  },\r\n  \"fach\": [{\r\n    \"name\": \"Softwarearchitektur\",\r\n    \"abkuerzung\": \"SWA\"\r\n  }]\r\n}",
+							"raw": "{\r\n  \"vorname\": \"Email\",\r\n  \"nachname\": \"Vorhanden\",\r\n  \"geburstdatum\": \"2000-01-01\",\r\n  \"matrikel\": \"62344\",\r\n  \"email\": \"sarah.brown@example.biz\",\r\n  \"studienfach\": \"WIIB\",\r\n  \"abschluss\": \"BACHELOR\",\r\n  \"homepage\": \"https://post.rest\",\r\n  \"adresse\": {\r\n    \"ort\": \"POSTOrt\",\r\n    \"plz\": \"123\",\r\n    \"land\": \"USA\"\r\n  },\r\n  \"fach\": [{\r\n    \"name\": \"Softwarearchitektur\",\r\n    \"abkuerzung\": \"SWA\"\r\n  }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
