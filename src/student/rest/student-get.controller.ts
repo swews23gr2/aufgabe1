@@ -98,7 +98,7 @@ export class StudentQuery implements Suchkriterien {
     declare readonly nachname: string;
 
     @ApiProperty({ required: false })
-    declare readonly geburtsdatum: Date;
+    declare readonly geburstdatum: Date;
 
     @ApiProperty({ required: false })
     declare readonly matrikel: number;
@@ -285,7 +285,7 @@ export class StudentGetController {
         const studentModel: StudentModel = {
             vorname: student.vorname,
             nachname: student.nachname,
-            geburtsdatum: student.geburtsdatum,
+            geburstdatum: student.geburstdatum,
             matrikel: student.matrikel,
             email: student.email,
             studienfach: student.studienfach,

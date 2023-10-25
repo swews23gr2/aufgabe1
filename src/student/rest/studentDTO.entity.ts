@@ -46,7 +46,7 @@ export class StudentDtoOhneRef {
 
     @IsISO8601({ strict: true })
     @ApiProperty({ example: '2021-01-31' })
-    readonly geburtsdatum: Date | string | undefined;
+    readonly geburstdatum: Date | string | undefined;
 
     @IsOptional()
     @ApiProperty({ example: 12_345, type: Number })

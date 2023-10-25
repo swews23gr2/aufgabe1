@@ -1,4 +1,4 @@
-id;version;vorname;nachname;geburtsdatum;matrikel;email;studienfach;abschluss;homepage;erzeugt;aktualisiert
+id;version;vorname;nachname;geburstdatum;matrikel;email;studienfach;abschluss;homepage;erzeugt;aktualisiert
 1;0;Oliver;Smith;1995-07-12 00:00:00;34921;john.doe@example.com;WIIB;BACHELOR;https://acme.at;2022-02-01 00:00:00;2022-02-01 00:00:00
 20;0;Emma;Johnson;1988-11-26 00:00:00;76845;alice.smith@example.org;IB;BACHELOR;https://acme.biz;2022-02-02 00:00:00;2022-02-02 00:00:00
 30;0;Liam;Williams;2000-03-04 00:00:00;12357;mike.jones@example.net;MIB;MASTER;https://acme.com;2022-02-03 00:00:00;2022-02-03 00:00:00
