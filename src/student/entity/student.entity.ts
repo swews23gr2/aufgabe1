@@ -45,7 +45,7 @@ export class Student {
 
     @Column('date')
     @ApiProperty({ example: '2021-01-31' })
-    readonly geburstdatum: Date | string | undefined;
+    readonly geburtsdatum: Date | string | undefined;
 
     @Column('int')
     @ApiProperty({ example: 12_345, type: Number })
@@ -93,7 +93,7 @@ export class Student {
             version: this.version,
             vorname: this.vorname,
             nachname: this.nachname,
-            geburstdatum: this.geburstdatum,
+            geburtsdatum: this.geburtsdatum,
             matrikel: this.matrikel,
             email: this.email,
             studienfach: this.studienfach,
