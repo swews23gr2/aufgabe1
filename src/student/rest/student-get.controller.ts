@@ -114,6 +114,9 @@ export class StudentQuery implements Suchkriterien {
 
     @ApiProperty({ required: false })
     declare readonly homepage: string;
+
+    @ApiProperty({ required: false })
+    declare readonly adresse: string;
 }
 
 const APPLICATION_HAL_JSON = 'application/hal+json';
