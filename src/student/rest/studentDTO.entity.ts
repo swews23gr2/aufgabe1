@@ -80,13 +80,6 @@ export class StudentDTO extends StudentDtoOhneRef {
     @IsOptional()
     @IsArray()
     @ValidateNested({ each: true })
-    @Type(() => FachDTO)
-    @ApiProperty({ type: [FachDTO] })
-    readonly abbildungen: FachDTO[] | undefined;
-
-    @IsOptional()
-    @IsArray()
-    @ValidateNested({ each: true })
     @ArrayUnique()
     @Type(() => FachDTO)
     @ApiProperty({ type: [FachDTO] })
