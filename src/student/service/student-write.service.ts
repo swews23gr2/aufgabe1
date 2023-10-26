@@ -6,13 +6,13 @@
 import { Adresse } from '../entity/adresse.entity.js';
 // eslint-disable-next-line sort-imports
 import { type DeleteResult, Repository } from 'typeorm';
-import { Injectable, NotFoundException } from '@nestjs/common';
 import {
     EmailExistsException,
     MatrikelExistsException,
     VersionInvalidException,
     VersionOutdatedException,
 } from './exceptions.js';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Fach } from '../entity/fach.entity.js';
 import { Student } from '../entity/student.entity.js';
 import { StudentReadService } from './student-read.service.js';

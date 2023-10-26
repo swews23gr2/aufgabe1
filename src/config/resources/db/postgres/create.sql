@@ -16,63 +16,42 @@
 -- docker compose exec postgres bash
 -- psql --dbname=buch --username=buch --file=/scripts/create-table-buch.sql
 
--- https://www.postgresql.org/docs/devel/app-psql.html
--- https://www.postgresql.org/docs/current/ddl-schemas.html
--- https://www.postgresql.org/docs/current/ddl-schemas.html#DDL-SCHEMAS-CREATE
--- "user-private schema" (Default-Schema: public)
-CREATE SCHEMA IF NOT EXISTS AUTHORIZATION buch;
+CREATE SCHEMA IF NOT EXISTS AUTHORIZATION student;
 
-ALTER ROLE buch SET search_path = 'buch';
+ALTER ROLE student SET search_path = 'student';
 
--- https://www.postgresql.org/docs/current/sql-createtype.html
--- https://www.postgresql.org/docs/current/datatype-enum.html
-CREATE TYPE buchart AS ENUM ('DRUCKAUSGABE', 'KINDLE');
+CREATE TYPE abschluss AS ENUM ('BACHELOR', 'MASTER');
 
--- https://www.postgresql.org/docs/current/sql-createtable.html
--- https://www.postgresql.org/docs/current/datatype.html
-CREATE TABLE IF NOT EXISTS buch (
-                  -- https://www.postgresql.org/docs/current/datatype-numeric.html#DATATYPE-INT
-                  -- https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-PRIMARY-KEYS
-                  -- impliziter Index fuer Primary Key
-                  -- "GENERATED ALWAYS AS IDENTITY" gemaess SQL-Standard
-                  -- entspricht SERIAL mit generierter Sequenz buch_id_seq
-    id            integer GENERATED ALWAYS AS IDENTITY(START WITH 1000) PRIMARY KEY USING INDEX TABLESPACE buchspace,
-                  -- https://www.postgresql.org/docs/current/ddl-constraints.html#id-1.5.4.6.6
+CREATE TABLE IF NOT EXISTS student (
+    id            integer GENERATED ALWAYS AS IDENTITY(START WITH 1000) PRIMARY KEY USING INDEX TABLESPACE studentspace,
+                  
     version       integer NOT NULL DEFAULT 0,
-                  -- impliziter Index als B-Baum durch UNIQUE
-                  -- https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-UNIQUE-CONSTRAINTS
-    isbn          varchar(17) NOT NULL UNIQUE USING INDEX TABLESPACE buchspace,
-                  -- https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-CHECK-CONSTRAINTS
-                  -- https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-POSIX-REGEXP
-    rating        integer NOT NULL CHECK (rating >= 0 AND rating <= 5),
-    art           buchart,
-                  -- https://www.postgresql.org/docs/current/datatype-numeric.html#DATATYPE-NUMERIC-DECIMAL
-                  -- 10 Stellen, davon 2 Nachkommastellen
-    preis         decimal(8,2) NOT NULL,
-    rabatt        decimal(4,3) NOT NULL,
-                  -- https://www.postgresql.org/docs/current/datatype-boolean.html
-    lieferbar     boolean NOT NULL DEFAULT FALSE,
-                  -- https://www.postgresql.org/docs/current/datatype-datetime.html
-    datum         date,
-    homepage      varchar(40),
-    schlagwoerter varchar(64),
-                  -- https://www.postgresql.org/docs/current/datatype-datetime.html
+    vorname       varchar(255),
+    nachname       varchar(255),
+    geburstdatum  timestamp,
+    matrikel      integer NOT NULL UNIQUE,
+    email         varchar(255),
+    studienfach   varchar(255),
+    abschluss     varchar(255),
+    homepage      varchar(255),
     erzeugt       timestamp NOT NULL DEFAULT NOW(),
     aktualisiert  timestamp NOT NULL DEFAULT NOW()
-) TABLESPACE buchspace;
+) TABLESPACE studentspace;
 
-CREATE TABLE IF NOT EXISTS titel (
-    id          integer GENERATED ALWAYS AS IDENTITY(START WITH 1000) PRIMARY KEY USING INDEX TABLESPACE buchspace,
-    titel       varchar(40) NOT NULL,
-    untertitel  varchar(40),
-    buch_id     integer NOT NULL UNIQUE USING INDEX TABLESPACE buchspace REFERENCES buch
-) TABLESPACE buchspace;
+CREATE TABLE IF NOT EXISTS adresse (
+    id          integer GENERATED ALWAYS AS IDENTITY(START WITH 1000) PRIMARY KEY USING INDEX TABLESPACE studentspace,
+    ort         varchar(40) NOT NULL,
+    plz         varchar(40),
+    land        varchar(50),
+    student_id  integer NOT NULL UNIQUE USING INDEX TABLESPACE studentspace REFERENCES student
+) TABLESPACE studentspace;
 
 
-CREATE TABLE IF NOT EXISTS abbildung (
-    id              integer GENERATED ALWAYS AS IDENTITY(START WITH 1000) PRIMARY KEY USING INDEX TABLESPACE buchspace,
-    beschriftung    varchar(32) NOT NULL,
-    content_type    varchar(16) NOT NULL,
-    buch_id         integer NOT NULL REFERENCES buch
-) TABLESPACE buchspace;
-CREATE INDEX IF NOT EXISTS abbildung_buch_id_idx ON abbildung(buch_id) TABLESPACE buchspace;
+CREATE TABLE IF NOT EXISTS fach (
+    id              integer GENERATED ALWAYS AS IDENTITY(START WITH 1000) PRIMARY KEY USING INDEX TABLESPACE studentspace,
+    name            varchar(255) NOT NULL,
+    abkuerzung      varchar(255) NOT NULL,
+    student_id      integer NOT NULL REFERENCES student
+) TABLESPACE studentspace;
+
+CREATE INDEX IF NOT EXISTS fach_student_id_idx ON fach(student_id) TABLESPACE studentspace;
