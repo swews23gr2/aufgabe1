@@ -56,13 +56,13 @@ export class QueryBuilder {
         return queryBuilder;
     }
 
-    build({ abschluss, ...props }: Suchkriterien) {
-        this.#logger.debug('build: abschluss=%s, props=%o', abschluss, props);
+    build({ adresse, ...props }: Suchkriterien) {
+        this.#logger.debug('build: adresse=%s, props=%o', adresse, props);
 
         let queryBuilder = this.#repo.createQueryBuilder(this.#studentAlias);
         queryBuilder.innerJoinAndSelect(
-            `${this.#studentAlias}.abschluss`,
-            'abschluss',
+            `${this.#studentAlias}.adresse`,
+            'adresse',
         );
 
         // type-coverage:ignore-next-line
@@ -70,12 +70,12 @@ export class QueryBuilder {
         let useWhere = true;
 
         // type-coverage:ignore-next-line
-        if (abschluss !== undefined) {
+        if (adresse !== undefined && typeof adresse === 'string') {
             const ilike =
                 typeOrmModuleOptions.type === 'postgres' ? 'ilike' : 'like';
             queryBuilder = queryBuilder.where(
-                `${this.#adresseAlias}.abschluss ${ilike} :abschluss`,
-                { abschluss: `%${abschluss}%` },
+                `${this.#adresseAlias}.ort ${ilike} :ort`,
+                { ort: `%${adresse}%` },
             );
             useWhere = false;
         }
@@ -85,13 +85,13 @@ export class QueryBuilder {
             param[key] = (props as Record<string, any>)[key]; // eslint-disable-line @typescript-eslint/no-unsafe-assignment, security/detect-object-injection
             queryBuilder = useWhere
                 ? queryBuilder.where(
-                      `${this.#studentAlias}.${key} = :${key}`,
-                      param,
-                  )
+                    `${this.#studentAlias}.${key} = :${key}`,
+                    param,
+                )
                 : queryBuilder.andWhere(
-                      `${this.#studentAlias}.${key} = :${key}`,
-                      param,
-                  );
+                    `${this.#studentAlias}.${key} = :${key}`,
+                    param,
+                );
             useWhere = false;
         });
 

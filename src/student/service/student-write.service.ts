@@ -8,6 +8,7 @@ import { Adresse } from '../entity/adresse.entity.js';
 import { type DeleteResult, Repository } from 'typeorm';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import {
+    EmailExistsException,
     MatrikelExistsException,
     VersionInvalidException,
     VersionOutdatedException,
@@ -66,6 +67,7 @@ export class StudentWriteService {
     async create(student: Student): Promise<number> {
         this.#logger.debug('create: student=%o', student);
         await this.#validateCreate(student);
+        await this.#validateEmail(student);
 
         const studentDb = await this.#repo.save(student);
         this.#logger.debug('create: studentDb=%o', studentDb);
@@ -151,6 +153,20 @@ export class StudentWriteService {
     async #validateCreate(student: Student): Promise<void> {
         this.#logger.debug('#validateCreate: student=%o', student);
 
+        const { matrikel } = student;
+        try {
+            await this.#readService.find({ matrikel: matrikel! });
+        } catch (err) {
+            if (err instanceof NotFoundException) {
+                return;
+            }
+        }
+        throw new MatrikelExistsException(matrikel!);
+    }
+
+    async #validateEmail(student: Student): Promise<void> {
+        this.#logger.debug('#validateCreate: student=%o', student);
+
         const { email } = student;
         try {
             await this.#readService.find({ email: email! });
@@ -159,7 +175,7 @@ export class StudentWriteService {
                 return;
             }
         }
-        throw new MatrikelExistsException(email!);
+        throw new EmailExistsException(email!);
     }
 
     async #sendmail(student: Student) {
