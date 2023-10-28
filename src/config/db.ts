@@ -40,7 +40,7 @@ export const resourcesDir = resolve(nodeConfig.resourcesDir, 'db', dbType);
 export let typeOrmModuleOptions: TypeOrmModuleOptions;
 switch (dbType) {
     case 'postgres': {
-        //const cert = readFileSync(resolve(resourcesDir, 'certificate.cer')); // eslint-disable-line security/detect-non-literal-fs-filename
+        const cert = readFileSync(resolve(resourcesDir, 'certificate.cer')); // eslint-disable-line security/detect-non-literal-fs-filename
         typeOrmModuleOptions = {
             type: 'postgres',
             host,
@@ -52,12 +52,12 @@ switch (dbType) {
             namingStrategy,
             logging,
             logger,
-            //ssl: { cert },
-            // extra: {
-            //     ssl: {
-            //         rejectUnauthorized: false,
-            //     },
-            // },
+            ssl: { cert },
+            extra: {
+                ssl: {
+                    rejectUnauthorized: false,
+                },
+            },
         };
         break;
     }
