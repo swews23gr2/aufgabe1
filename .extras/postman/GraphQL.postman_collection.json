@@ -1,0 +1,603 @@
+{
+	"info": {
+		"_postman_id": "59d9b31a-0316-452b-a2bb-989f6a89bd59",
+		"name": "GraphQL",
+		"description": "GraphQL-Schnittstelle",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30052723"
+	},
+	"item": [
+		{
+			"name": "Query",
+			"item": [
+				{
+					"name": "Suche version, vorname, nachname, matrikelnummer und adresse vom Student mit ID 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Body mit den Properties', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { student } = body.data;\r",
+									"    const { version, vorname, nachname, matrikel, adresse } = student;\r",
+									"    pm.expect(version).to.be.a('number').that.is.gte(0);\r",
+									"    pm.expect(vorname).to.be.a('string');\r",
+									"    pm.expect(nachname).to.be.a('string');\r",
+									"    pm.expect(matrikel).to.be.a('number').that.is.gte(0);\r",
+									"    pm.expect(adresse.ort).to.be.a('string');\r",
+									"    pm.expect(adresse.plz).to.be.a('string');\r",
+									"    pm.expect(adresse.land).to.be.a('string');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query ($id: ID! = \"1\") {\r\n  student(id: $id) {\r\n    version\r\n    vorname\r\n    nachname\r\n    matrikel\r\n    adresse {\r\n      ort\r\n      plz\r\n      land\r\n    }\r\n  }\r\n}",
+								"variables": "{\r\n  \"id\": \"1\"\r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Suche matrikelnummer von einem Student mit nicht-vorhandener id 999999",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Body mit errors', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { errors } = body;\r",
+									"    pm.expect(errors).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    const { message, path, extensions } = errors[0];\r",
+									"    pm.expect(message).to.include('999999');\r",
+									"    pm.expect(path).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    pm.expect(path[0]).to.be.equal('student');\r",
+									"    pm.expect(extensions.code).to.be.equal('BAD_USER_INPUT');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query ($id: ID! = \"1\") {\r\n  student(id: $id) {\r\n    matrikel\r\n  }\r\n}",
+								"variables": "{\r\n  \"id\": \"999999\"\r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Suche id, version, vorname, nachname und matrikelnummer von allen Studenten",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Body mit den Properties', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { studenten } = body.data;\r",
+									"    pm.expect(studenten).to.be.an('array').that.is.not.empty;\r",
+									"    studenten.forEach(student => {\r",
+									"        const { id, version, vorname, nachname, matrikel } = student;\r",
+									"        pm.expect(id).to.be.a('number').that.is.gte(0);\r",
+									"        pm.expect(version).to.be.a('number').that.is.gte(0);\r",
+									"        pm.expect(vorname).to.be.a('string');\r",
+									"        pm.expect(nachname).to.be.a('string');\r",
+									"        pm.expect(matrikel).to.be.a('number').that.is.gte(0);\r",
+									"    });\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "{\r\n  studenten {\r\n    id\r\n    version\r\n    vorname\r\n    nachname\r\n    matrikel\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Suche matrikelnummer, vorname, nachname und adresse von Studenten mit Teilstring \"a\" im Ort der Adresse",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Body mit matrikel, vorname, nachname', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { studenten } = body.data;\r",
+									"    pm.expect(studenten).to.be.an('array').that.is.not.empty;\r",
+									"    studenten.forEach(student => {\r",
+									"        const { matrikel, vorname, nachname, adresse } = student;\r",
+									"        pm.expect(matrikel).to.be.a('number').that.is.gte(0);\r",
+									"        pm.expect(vorname).to.be.a('string');\r",
+									"        pm.expect(nachname).to.be.a('string');\r",
+									"        pm.expect(adresse.ort).to.be.a('string').that.matches(/a/i);\r",
+									"        pm.expect(adresse.plz).to.be.a('string');\r",
+									"        pm.expect(adresse.land).to.be.a('string');\r",
+									"    });\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query ($ort: String = \"a\") {\r\n  studenten(ort: $ort) {\r\n    matrikel\r\n    vorname\r\n    nachname\r\n    adresse {\r\n        ort\r\n        plz\r\n        land\r\n    }\r\n  }\r\n}",
+								"variables": "{\r\n  \"titel\": \"ta\"\r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Queries mit der GraphQL-Schnittstelle"
+		},
+		{
+			"name": "Mutation",
+			"item": [
+				{
+					"name": "Neuer Student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Body mit den Properties', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { data } = body;\r",
+									"    pm.expect(data.create.id).to.be.a('number').that.is.gte(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\r\n  create(\r\n    input: {\r\n      vorname: \"Max\",\r\n      nachname: \"GraphQL\",\r\n      geburstdatum: \"2022-01-31\",\r\n      matrikel: 87299,\r\n      email: \"max.graphql@example.de\",\r\n      studienfach: \"WIIB\",\r\n      abschluss: BACHELOR,\r\n      homepage: \"https://create-mutation.com\",\r\n      adresse: {\r\n        ort: \"Ortcreatemutation\",\r\n        plz: \"76133\"\r\n        land: \"GERMANY\"      },\r\n      fach: [{\r\n        name: \"Mathematik 2\",\r\n        abkuerzung: \"Mathe 2\"\r\n      }]\r\n    }\r\n   ) {\r\n      id\r\n    }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Neuer Student mit ungültigen Daten",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Fehlermeldungen im Response Body', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { errors } = body;\r",
+									"    pm.expect(errors).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    const { message, path, extensions } = errors[0];\r",
+									"    pm.expect(message).to.be.a('string');\r",
+									"    const props = ['email', 'geburstdatum', 'homepage'];\r",
+									"    props.forEach(prop => pm.expect(message).to.include(prop));\r",
+									"    pm.expect(path).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    pm.expect(path[0]).to.be.equal('create');\r",
+									"    pm.expect(extensions.code).to.be.equal('BAD_USER_INPUT');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\r\n  create(\r\n    input: {\r\n      vorname: \"Colin\",\r\n      nachname: \"Williams\",\r\n      geburstdatum: \"1-1-1\",\r\n      matrikel: 76845,\r\n      email: \"falsche.email\",\r\n      studienfach: \"WIIB\",\r\n      abschluss: BACHELOR,\r\n      homepage: \"falsche-homepage\",\r\n      adresse: {\r\n        ort: \"Ortcreatemutation\",\r\n        plz: \"12345\"\r\n    land: \"GERMANY\"      },\r\n      fach: [{\r\n        name: \"Mathematik 2\",\r\n        abkuerzung: \"Mathe 2\"\r\n      }]\r\n    }\r\n  ) {\r\n      id\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Student mit ID 40 aktualisieren",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Body mit aktualisierter Versionsnummer', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { data } = body;\r",
+									"    pm.expect(data.update.version).to.be.a('number').that.is.gte(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\r\n  update(\r\n    input: {\r\n      id: \"40\",\r\n      version: 0,\r\n      vorname: \"Sophie\",\r\n      nachname: \"Williams\"\r\n      geburstdatum: \"1999-12-11\",\r\n      matrikel: 77656,\r\n      email: \"sophie.graphql@example.de\",\r\n      studienfach: \"WIIB\",\r\n      abschluss: MASTER,\r\n      homepage: \"https://update.mutation.com\",\r\n    }\r\n  ) {\r\n      version\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Student mit ID 40 mit ungültigen Daten aktualisieren",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Fehlermeldungen im Response Body', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { errors } = body;\r",
+									"    pm.expect(errors).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    const { message, path, extensions } = errors[0];\r",
+									"    pm.expect(message).to.be.a('string');\r",
+									"    const props = ['homepage', 'geburstdatum', 'email'];\r",
+									"    props.forEach(prop => pm.expect(message).to.include(prop));\r",
+									"    pm.expect(path).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    pm.expect(path[0]).to.be.equal('update');\r",
+									"    pm.expect(extensions.code).to.be.equal('BAD_USER_INPUT');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\r\n  update(\r\n    input: {\r\n      id: \"40\",\r\n      version: 0,\r\n      vorname: \"Sophie\",\r\n      nachname: \"Williams\"\r\n      geburstdatum: \"1-1-1\",\r\n      matrikel: 77656,\r\n      email: \"XY\",\r\n      studienfach: \"WIIB\",\r\n      abschluss: BACHELOR,\r\n      homepage: \"keinehomepage\",\r\n    }\r\n  ) {\r\n      version\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Nicht-Vorhandener Student aktualisieren",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Fehlermeldungen im Response Body', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { errors } = body;\r",
+									"    pm.expect(errors).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    const { message, path, extensions } = errors[0];\r",
+									"    pm.expect(message).to.be.a('string').that.includes('999999');\r",
+									"    pm.expect(path).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    pm.expect(path[0]).to.be.equal('update');\r",
+									"    pm.expect(extensions.code).to.be.equal('BAD_USER_INPUT');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\r\n  update(\r\n    input: {\r\n      id: \"999999\",\r\n      version: 0,\r\n      vorname: \"William\",\r\n      nachname: \"Johnson\"\r\n      geburstdatum: \"1999-10-19\",\r\n      matrikel: 77665,\r\n      email: \"william.graphql@example.de\",\r\n      studienfach: \"WIIB\",\r\n      abschluss: BACHELOR,\r\n      homepage: \"https://update.mutation.com\"\r\n    }\r\n  ) {\r\n      version\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Student mit ID 60 löschen",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Body mit den Properties', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { data } = body;\r",
+									"    pm.expect(data.delete).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\r\n  delete(id: \"60\")\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Neuanlegen, Ändern und Löschen mit der GraphQL-Schnittstelle",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					}
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "graphql_url",
+			"value": "{{base_url}}/graphql",
+			"type": "string"
+		},
+		{
+			"key": "TOKEN",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
