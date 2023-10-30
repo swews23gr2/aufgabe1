@@ -267,12 +267,12 @@ export class StudentGetController {
         const { id } = student;
         const links = all
             ? {
-                self: { href: `${baseUri}/${id}` },
-                list: { href: `${baseUri}` },
-                add: { href: `${baseUri}` },
-                update: { href: `${baseUri}/${id}` },
-                remove: { href: `${baseUri}/${id}` },
-            }
+                  self: { href: `${baseUri}/${id}` },
+                  list: { href: `${baseUri}` },
+                  add: { href: `${baseUri}` },
+                  update: { href: `${baseUri}/${id}` },
+                  remove: { href: `${baseUri}/${id}` },
+              }
             : { self: { href: `${baseUri}/${id}` } };
 
         this.#logger.debug('#toModel: student=%o, links=%o', student, links);

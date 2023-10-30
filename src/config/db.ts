@@ -11,6 +11,7 @@ import { dbType } from './dbtype.js';
 import { entities } from '../student/entity/entities.js';
 import { loggerDefaultValue } from './logger.js';
 import { nodeConfig } from './node.js';
+// eslint-disable-next-line n/no-sync
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
@@ -40,6 +41,7 @@ export const resourcesDir = resolve(nodeConfig.resourcesDir, 'db', dbType);
 export let typeOrmModuleOptions: TypeOrmModuleOptions;
 switch (dbType) {
     case 'postgres': {
+        // eslint-disable-next-line n/no-sync
         const cert = readFileSync(resolve(resourcesDir, 'certificate.cer')); // eslint-disable-line security/detect-non-literal-fs-filename
         typeOrmModuleOptions = {
             type: 'postgres',
@@ -62,6 +64,7 @@ switch (dbType) {
         break;
     }
     case 'mysql': {
+        // eslint-disable-next-line n/no-sync
         const cert = readFileSync(resolve(resourcesDir, 'certificate.cer')); // eslint-disable-line security/detect-non-literal-fs-filename
         typeOrmModuleOptions = {
             type: 'mysql',
