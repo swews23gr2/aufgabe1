@@ -1,3 +1,5 @@
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable n/no-sync */
 /*
  * Copyright (C) 2021 - present Juergen Zimmermann, Florian Goebel, Hochschule Karlsruhe
  *
