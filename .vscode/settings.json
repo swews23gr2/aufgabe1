@@ -2,4 +2,8 @@
   "csv-preview.separator": "\\;",
   "files.eol": "\n",
   "typescript.tsdk": "node_modules/typescript/lib",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "eslint.validate": ["typescript"]
 }

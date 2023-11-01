@@ -10,9 +10,9 @@ import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.
 import { type Student } from '../entity/student.entity.js';
 import { StudentDTO } from '../rest/studentDTO.entity.js';
 import { StudentWriteService } from '../service/student-write.service.js';
-//import { JwtAuthGraphQlGuard } from '../../security/auth/jwt/jwt-auth-graphql.guard.js';
-//import { RolesAllowed } from '../../security/auth/roles/roles-allowed.decorator.js';
-//import { RolesGraphQlGuard } from '../../security/auth/roles/roles-graphql.guard.js';
+// import { JwtAuthGraphQlGuard } from '../../security/auth/jwt/jwt-auth-graphql.guard.js';
+// import { RolesAllowed } from '../../security/auth/roles/roles-allowed.decorator.js';
+// import { RolesGraphQlGuard } from '../../security/auth/roles/roles-graphql.guard.js';
 import { getLogger } from '../../logger/logger.js';
 
 // Authentifizierung und Autorisierung durch
@@ -43,7 +43,7 @@ export class StudentUpdateDTO extends StudentDTO {
 }
 @Resolver()
 // alternativ: globale Aktivierung der Guards https://docs.nestjs.com/security/authorization#basic-rbac-implementation
-//@UseGuards(JwtAuthGraphQlGuard, RolesGraphQlGuard)
+// @UseGuards(JwtAuthGraphQlGuard, RolesGraphQlGuard)
 @UseFilters(HttpExceptionFilter)
 @UseInterceptors(ResponseTimeInterceptor)
 export class StudentMutationResolver {
@@ -56,7 +56,7 @@ export class StudentMutationResolver {
     }
 
     @Mutation()
-    //@RolesAllowed('admin', 'fachabteilung')
+    // @RolesAllowed('admin', 'fachabteilung')
     async create(@Args('input') studentDTO: StudentDTO) {
         this.#logger.debug('create: studentDTO=%o', studentDTO);
 
@@ -69,7 +69,7 @@ export class StudentMutationResolver {
     }
 
     @Mutation()
-    //@RolesAllowed('admin', 'fachabteilung')
+    // @RolesAllowed('admin', 'fachabteilung')
     async update(@Args('input') studentDTO: StudentUpdateDTO) {
         this.#logger.debug('update: student=%o', studentDTO);
 
@@ -88,7 +88,7 @@ export class StudentMutationResolver {
     }
 
     @Mutation()
-    //@RolesAllowed('admin')
+    // @RolesAllowed('admin')
     async delete(@Args() id: IdInput) {
         const idStr = id.id;
         this.#logger.debug('delete: id=%s', idStr);

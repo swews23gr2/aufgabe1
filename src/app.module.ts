@@ -8,7 +8,7 @@ import { AuthModule } from './security/auth/auth.module.js';
 import { DevModule } from './config/dev/dev.module.js';
 import { GraphQLModule } from '@nestjs/graphql';
 // TODO: Muss noch implementiert werden!
-//import { HealthModule } from './health/health.module.js';
+// import { HealthModule } from './health/health.module.js';
 import { LoggerModule } from './logger/logger.module.js';
 import { RequestLoggerMiddleware } from './logger/request-logger.middleware.js';
 import { StudentGetController } from './student/rest/student-get.controller.js';
@@ -25,7 +25,7 @@ import { typeOrmModuleOptions } from './config/db.js';
         DevModule,
         GraphQLModule.forRoot<ApolloDriverConfig>(graphQlModuleOptions),
         LoggerModule,
-        //HealthModule,
+        // HealthModule,
         TypeOrmModule.forRoot(typeOrmModuleOptions),
     ],
 })

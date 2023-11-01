@@ -22,7 +22,6 @@ import { entities } from './entity/entities.js';
  * Funktionalität für TypeORM.
  */
 @Module({
-    //imports: [MailModule, TypeOrmModule.forFeature(entities), AuthModule],
     imports: [MailModule, TypeOrmModule.forFeature(entities), AuthModule],
     controllers: [StudentGetController, StudentWriteController],
     providers: [

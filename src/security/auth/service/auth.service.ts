@@ -69,7 +69,7 @@ export class AuthService {
         }
 
         const userPassword = user.password;
-        this.#logger.debug('validate: userPassword=*****, password=*****'); //NOSONAR
+        this.#logger.debug('validate: userPassword=*****, password=*****'); // NOSONAR
         const isPasswordOK = await this.#checkPassword(userPassword, pass);
         if (!isPasswordOK) {
             this.#logger.debug('validate: Falsches password.');

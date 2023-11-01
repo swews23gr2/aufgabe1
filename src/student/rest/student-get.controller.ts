@@ -8,7 +8,7 @@ import { type Abschluss, type Student } from '../entity/student.entity.js';
 import { type Adresse } from '../entity/adresse.entity.js';
 // eslint-disable-next-line sort-imports
 import {
-    //ApiBearerAuth,
+    // ApiBearerAuth,
     ApiHeader,
     ApiNotFoundResponse,
     ApiOkResponse,
@@ -32,7 +32,7 @@ import {
     Query,
     Req,
     Res,
-    //UseGuards,
+    // UseGuards,
     UseInterceptors,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
@@ -40,8 +40,8 @@ import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.
 import { getBaseUri } from './getBaseUri.js';
 import { getLogger } from '../../logger/logger.js';
 import { paths } from '../../config/paths.js';
-//import { JwtAuthGuard } from '../../security/auth/jwt/jwt-auth.guard.js';
-//import { RolesGuard } from '../../security/auth/roles/roles.guard.js';
+// import { JwtAuthGuard } from '../../security/auth/jwt/jwt-auth.guard.js';
+// import { RolesGuard } from '../../security/auth/roles/roles.guard.js';
 
 /** href-Link für HATEOAS */
 export interface Link {
@@ -86,13 +86,7 @@ export interface StudentenModel {
 
 /**
  * Klasse für `StudentGetController`, um Queries in _OpenAPI_ bzw. Swagger zu
- * formulieren. `StudentController` hat dieselben Properties wie die Basisklasse
- * `Student` - allerdings mit dem Unterschied, dass diese Properties beim Ableiten
- * so überschrieben sind, dass sie auch nicht gesetzt bzw. undefined sein
- * dürfen, damit die Queries flexibel formuliert werden können. Deshalb ist auch
- * immer der zusätzliche Typ undefined erforderlich.
- * Außerdem muss noch `string` statt `Date` verwendet werden, weil es in OpenAPI
- * den Typ Date nicht gibt.
+ * formulieren.
  */
 export class StudentQuery implements Suchkriterien {
     @ApiProperty({ required: false })
