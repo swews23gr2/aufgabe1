@@ -19,7 +19,7 @@ type Mutation {
   delete(id: ID!): Boolean
 
   # Mutation, weil z.B. der Login-Zeitpunkt im IDM-System gespeichert wird
-  # login(username: String!, password: String!): LoginResult
+  login(username: String!, password: String!): LoginResult
 }
 
 "Daten zur Adresse eines Studenten"
@@ -105,8 +105,8 @@ type UpdatePayload {
   version: Int
 }
 
-#type LoginResult {
-#  token: String!
-#  expiresIn: String!
-#  roles: [String]!
-#}
+type LoginResult {
+  token: String!
+  expiresIn: String!
+  roles: [String]!
+}

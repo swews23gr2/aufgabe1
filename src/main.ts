@@ -6,10 +6,9 @@ import {
 import { type INestApplication, ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module.js';
 import { NestFactory } from '@nestjs/core';
-//import compression from 'compression';
+import compression from 'compression';
 import { corsOptions } from './config/cors.options.js';
-// TODO: Security muss noch implementiert werden!
-//import { helmetHandlers } from './security/http/helmet.handler.js';
+import { helmetHandlers } from './security/http/helmet.handler.js';
 import { nodeConfig } from './config/node.js';
 import { paths } from './config/paths.js';
 
@@ -37,7 +36,7 @@ const setupSwagger = (app: INestApplication) => {
 
 const bootstrap = async () => {
     const app = await NestFactory.create(AppModule, { httpsOptions });
-    //app.use(helmetHandlers, compression());
+    app.use(helmetHandlers, compression());
     app.useGlobalPipes(new ValidationPipe());
     setupSwagger(app);
     app.enableCors(corsOptions);

@@ -29,8 +29,7 @@ import {
     Put,
     Req,
     Res,
-    // TODO: Security muss noch implementiert werden!
-    //UseGuards,
+    UseGuards,
     UseInterceptors,
 } from '@nestjs/common';
 import { StudentDTO, StudentDtoOhneRef } from './studentDTO.entity.js';
@@ -39,14 +38,11 @@ import { Request, Response } from 'express';
 import { type Fach } from '../entity/fach.entity.js';
 import { type Student } from '../entity/student.entity.js';
 import { StudentWriteService } from '../service/student-write.service.js';
+import { JwtAuthGuard } from '../../security/auth/jwt/jwt-auth.guard.js';
 
-// TODO: Security muss noch implementiert werden!
-//import { JwtAuthGuard } from '../../security/auth/jwt/jwt-auth.guard.js';
-// eslint-disable-next-line sort-imports
 import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.js';
-// TODO: Security muss noch implementiert werden!
-//import { RolesAllowed } from '../../security/auth/roles/roles-allowed.decorator.js';
-//import { RolesGuard } from '../../security/auth/roles/roles.guard.js';
+import { RolesAllowed } from '../../security/auth/roles/roles-allowed.decorator.js';
+import { RolesGuard } from '../../security/auth/roles/roles.guard.js';
 import { getBaseUri } from './getBaseUri.js';
 import { getLogger } from '../../logger/logger.js';
 import { paths } from '../../config/paths.js';
@@ -58,8 +54,7 @@ const MSG_FORBIDDEN = 'Kein Token mit ausreichender Berechtigung vorhanden';
  */
 
 @Controller(paths.rest)
-// TODO: Security muss noch implementiert werden!
-//@UseGuards(JwtAuthGuard, RolesGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 @UseInterceptors(ResponseTimeInterceptor)
 @ApiTags('Student REST-API')
 @ApiBearerAuth()
@@ -89,9 +84,8 @@ export class StudentWriteController {
      * @returns Leeres Promise-Objekt.
      */
     @Post()
-    // TODO: Security muss noch implementiert werden!
-    //@RolesAllowed('admin', 'fachabteilung')
-    @ApiOperation({ summary: 'Ein neues Student anlegen' })
+    @RolesAllowed('admin', 'fachabteilung')
+    @ApiOperation({ summary: 'Einen neuen Student anlegen' })
     @ApiCreatedResponse({ description: 'Erfolgreich neu angelegt' })
     @ApiBadRequestResponse({ description: 'Fehlerhafte Studentdaten' })
     @ApiForbiddenResponse({ description: MSG_FORBIDDEN })
@@ -137,8 +131,7 @@ export class StudentWriteController {
      */
     // eslint-disable-next-line max-params
     @Put(':id')
-    // TODO: Security muss noch implementiert werden!
-    //@RolesAllowed('admin', 'fachabteilung')
+    @RolesAllowed('admin', 'fachabteilung')
     @HttpCode(HttpStatus.NO_CONTENT)
     @ApiOperation({
         summary: 'Ein vorhandenes Student aktualisieren',
@@ -199,8 +192,7 @@ export class StudentWriteController {
      * @returns Leeres Promise-Objekt.
      */
     @Delete(':id')
-    // TODO: Security muss noch implementiert werden!
-    //@RolesAllowed('admin')
+    @RolesAllowed('admin')
     @HttpCode(HttpStatus.NO_CONTENT)
     @ApiOperation({ summary: 'Student mit der ID löschen' })
     @ApiNoContentResponse({
