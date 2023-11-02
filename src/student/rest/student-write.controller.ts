@@ -3,8 +3,6 @@
  * @packageDocumentation
  */
 
-import { type Adresse } from '../entity/adresse.entity.js';
-// eslint-disable-next-line sort-imports
 import {
     ApiBadRequestResponse,
     ApiBearerAuth,
@@ -32,17 +30,16 @@ import {
     UseGuards,
     UseInterceptors,
 } from '@nestjs/common';
-import { StudentDTO, StudentDtoOhneRef } from './studentDTO.entity.js';
-// eslint-disable-next-line sort-imports
 import { Request, Response } from 'express';
+import { StudentDTO, StudentDtoOhneRef } from './studentDTO.entity.js';
+import { type Adresse } from '../entity/adresse.entity.js';
 import { type Fach } from '../entity/fach.entity.js';
-import { type Student } from '../entity/student.entity.js';
-import { StudentWriteService } from '../service/student-write.service.js';
 import { JwtAuthGuard } from '../../security/auth/jwt/jwt-auth.guard.js';
-
 import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.js';
 import { RolesAllowed } from '../../security/auth/roles/roles-allowed.decorator.js';
 import { RolesGuard } from '../../security/auth/roles/roles.guard.js';
+import { type Student } from '../entity/student.entity.js';
+import { StudentWriteService } from '../service/student-write.service.js';
 import { getBaseUri } from './getBaseUri.js';
 import { getLogger } from '../../logger/logger.js';
 import { paths } from '../../config/paths.js';
