@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "213556a3-e2e5-467c-965e-77ef01eeb011",
+		"_postman_id": "57c07d9c-5547-4310-9ea0-a05c3fc8591e",
 		"name": "REST",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "30815012"
+		"_exporter_id": "29993923",
+		"_collection_link": "https://martian-station-859163.postman.co/workspace/student~603e3c1f-35d0-4464-8eaa-75c3edb61b10/collection/29993923-57c07d9c-5547-4310-9ea0-a05c3fc8591e?action=share&source=collection_link&creator=29993923"
 	},
 	"item": [
 		{
@@ -1388,7 +1389,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"vorname\": \"Email\",\r\n  \"nachname\": \"Vorhanden\",\r\n  \"geburstdatum\": \"2000-01-01\",\r\n  \"matrikel\": \"62344\",\r\n  \"email\": \"jane.doe@post.rest\",\r\n  \"studienfach\": \"WIIB\",\r\n  \"abschluss\": \"BACHELOR\",\r\n  \"homepage\": \"https://post.rest\",\r\n  \"adresse\": {\r\n    \"ort\": \"POSTOrt\",\r\n    \"plz\": \"123\",\r\n    \"land\": \"USA\"\r\n  },\r\n  \"fach\": [{\r\n    \"name\": \"Softwarearchitektur\",\r\n    \"abkuerzung\": \"SWA\"\r\n  }]\r\n}",
+							"raw": "{\r\n  \"vorname\": \"Email\",\r\n  \"nachname\": \"Vorhanden\",\r\n  \"geburstdatum\": \"2000-01-01\",\r\n  \"matrikel\": \"34921\",\r\n  \"email\": \"jane.doe@post.rest\",\r\n  \"studienfach\": \"WIIB\",\r\n  \"abschluss\": \"BACHELOR\",\r\n  \"homepage\": \"https://post.rest\",\r\n  \"adresse\": {\r\n    \"ort\": \"POSTOrt\",\r\n    \"plz\": \"123\",\r\n    \"land\": \"USA\"\r\n  },\r\n  \"fach\": [{\r\n    \"name\": \"Softwarearchitektur\",\r\n    \"abkuerzung\": \"SWA\"\r\n  }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1863,6 +1864,36 @@
 						}
 					},
 					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
