@@ -32,7 +32,8 @@ db:
   #type: mysql
   type: sqlite
 
-  #host: localhost
+  host: postgres
+  #host: mysql
 
   #username: buch
   #password: p
@@ -45,7 +46,7 @@ db:
 # ==============================================================================
 log:
   level: debug
-  #dir: ./log
+  dir: /tmp
   pretty: true
   #default: true
 
@@ -68,8 +69,8 @@ health:
 # ==============================================================================
 mail:
   #activated: false
-  host: localhost
-  port: 5025
+  host: fakesmtp
+  port: 8025
   log: false
 
 # ==============================================================================
@@ -78,9 +79,3 @@ mail:
 auth:
   # https://github.com/docker/compose/issues/6741: '' wegen $
   passwordEncoded: '$argon2i$v=19$m=4096,t=3,p=1$aaxA2v/9rRSPGkwYN+NQog$27Huii1XtD3iEd62fog+04G26LRPZMHoYCI6AGKTL8M'
-
-# ==============================================================================
-# T e s t s
-# ==============================================================================
-#test:
-#  startDbServer: true
