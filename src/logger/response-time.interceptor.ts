@@ -49,7 +49,5 @@ export class ResponseTimeInterceptor implements NestInterceptor {
         return next.handle().pipe(tap(responseTimeObserver));
     }
 
-    readonly #empty = () => {
-        /* do nothing */
-    };
+    readonly #empty = () => {};
 }
