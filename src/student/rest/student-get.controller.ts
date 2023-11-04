@@ -8,6 +8,7 @@ import { type Abschluss, type Student } from '../entity/student.entity.js';
 import { type Adresse } from '../entity/adresse.entity.js';
 // eslint-disable-next-line sort-imports
 import {
+    // ApiBearerAuth,
     ApiHeader,
     ApiNotFoundResponse,
     ApiOkResponse,
@@ -31,6 +32,7 @@ import {
     Query,
     Req,
     Res,
+    // UseGuards,
     UseInterceptors,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
@@ -38,6 +40,8 @@ import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.
 import { getBaseUri } from './getBaseUri.js';
 import { getLogger } from '../../logger/logger.js';
 import { paths } from '../../config/paths.js';
+// import { JwtAuthGuard } from '../../security/auth/jwt/jwt-auth.guard.js';
+// import { RolesGuard } from '../../security/auth/roles/roles.guard.js';
 
 /** href-Link für HATEOAS */
 export interface Link {
@@ -82,13 +86,7 @@ export interface StudentenModel {
 
 /**
  * Klasse für `StudentGetController`, um Queries in _OpenAPI_ bzw. Swagger zu
- * formulieren. `StudentController` hat dieselben Properties wie die Basisklasse
- * `Student` - allerdings mit dem Unterschied, dass diese Properties beim Ableiten
- * so überschrieben sind, dass sie auch nicht gesetzt bzw. undefined sein
- * dürfen, damit die Queries flexibel formuliert werden können. Deshalb ist auch
- * immer der zusätzliche Typ undefined erforderlich.
- * Außerdem muss noch `string` statt `Date` verwendet werden, weil es in OpenAPI
- * den Typ Date nicht gibt.
+ * formulieren.
  */
 export class StudentQuery implements Suchkriterien {
     @ApiProperty({ required: false })
@@ -267,12 +265,12 @@ export class StudentGetController {
         const { id } = student;
         const links = all
             ? {
-                self: { href: `${baseUri}/${id}` },
-                list: { href: `${baseUri}` },
-                add: { href: `${baseUri}` },
-                update: { href: `${baseUri}/${id}` },
-                remove: { href: `${baseUri}/${id}` },
-            }
+                  self: { href: `${baseUri}/${id}` },
+                  list: { href: `${baseUri}` },
+                  add: { href: `${baseUri}` },
+                  update: { href: `${baseUri}/${id}` },
+                  remove: { href: `${baseUri}/${id}` },
+              }
             : { self: { href: `${baseUri}/${id}` } };
 
         this.#logger.debug('#toModel: student=%o, links=%o', student, links);
@@ -295,7 +293,6 @@ export class StudentGetController {
             _links: links,
         };
         /* eslint-enable unicorn/consistent-destructuring */
-
         return studentModel;
     }
 }

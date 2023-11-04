@@ -1,4 +1,4 @@
-//import { AuthModule } from '../security/auth/auth.module.js';
+import { AuthModule } from '../security/auth/auth.module.js';
 import { MailModule } from '../mail/mail.module.js';
 import { Module } from '@nestjs/common';
 import { QueryBuilder } from './service/query-builder.js';
@@ -22,8 +22,7 @@ import { entities } from './entity/entities.js';
  * Funktionalität für TypeORM.
  */
 @Module({
-    //imports: [MailModule, TypeOrmModule.forFeature(entities), AuthModule],
-    imports: [MailModule, TypeOrmModule.forFeature(entities)],
+    imports: [MailModule, TypeOrmModule.forFeature(entities), AuthModule],
     controllers: [StudentGetController, StudentWriteController],
     providers: [
         StudentReadService,

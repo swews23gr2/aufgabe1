@@ -1,10 +1,11 @@
 {
 	"info": {
-		"_postman_id": "59d9b31a-0316-452b-a2bb-989f6a89bd59",
+		"_postman_id": "14925805-657e-4b8e-a867-d04a7354a8f8",
 		"name": "GraphQL",
 		"description": "GraphQL-Schnittstelle",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "30052723"
+		"_exporter_id": "29993923",
+		"_collection_link": "https://martian-station-859163.postman.co/workspace/student~603e3c1f-35d0-4464-8eaa-75c3edb61b10/collection/29993923-14925805-657e-4b8e-a867-d04a7354a8f8?action=share&source=collection_link&creator=29993923"
 	},
 	"item": [
 		{
@@ -585,7 +586,143 @@
 						"type": "string"
 					}
 				]
-			}
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.sendRequest({",
+							"    url: 'https://localhost:3000/graphql',",
+							"    method: 'POST',",
+							"    header: {",
+							"        'Content-Type': 'application/json',",
+							"    },",
+							"    body: JSON.stringify({",
+							"        query: `",
+							"            mutation {",
+							"                login(username: \"admin\", password: \"p\") {",
+							"                    token",
+							"                }",
+							"            }",
+							"        `",
+							"    })",
+							"}, (err, res) => {",
+							"    pm.collectionVariables.set('TOKEN', res.json().data.login.token);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login als admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Body mit Token', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { token } = body.data.login;\r",
+									"    pm.expect(token).to.be.a('string').that.matches(/.+\\..+\\..+/u);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\r\n    login(username: \"admin\", password: \"p\") {\r\n        token\r\n    }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login mit falschem Passwort",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Statuscode 200', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test('Content-Type application/json', () => {\r",
+									"    const { response } = pm;\r",
+									"    const contentType = response.headers.get('Content-Type');\r",
+									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
+									"});\r",
+									"pm.test('Body mit Fehlermeldung', () => {\r",
+									"    const body = pm.response.json();\r",
+									"    const { errors } = body;\r",
+									"    pm.expect(errors).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    const error = errors[0];\r",
+									"    const { message, path, extensions } = error;\r",
+									"    pm.expect(message).to.be.a('string').that.includes('Passwort');\r",
+									"    pm.expect(path).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    pm.expect(path[0]).to.be.equal('login');\r",
+									"    pm.expect(extensions.code).to.be.equal('BAD_USER_INPUT');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\r\n    login(username: \"admin\", password: \"FALSCH\") {\r\n        token\r\n    }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{graphql_url}}",
+							"host": [
+								"{{graphql_url}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"variable": [
