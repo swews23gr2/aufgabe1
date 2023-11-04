@@ -1,10 +1,11 @@
 {
 	"info": {
-		"_postman_id": "56bb8b2a-336a-4259-8e7d-66358b885276",
+		"_postman_id": "14925805-657e-4b8e-a867-d04a7354a8f8",
 		"name": "GraphQL",
 		"description": "GraphQL-Schnittstelle",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "30815012"
+		"_exporter_id": "29993923",
+		"_collection_link": "https://martian-station-859163.postman.co/workspace/student~603e3c1f-35d0-4464-8eaa-75c3edb61b10/collection/29993923-14925805-657e-4b8e-a867-d04a7354a8f8?action=share&source=collection_link&creator=29993923"
 	},
 	"item": [
 		{
@@ -686,10 +687,16 @@
 									"    const contentType = response.headers.get('Content-Type');\r",
 									"    pm.expect(contentType).to.match(/^application\\/json(; charset=utf-8)?/u);\r",
 									"});\r",
-									"pm.test('Body mit Token', () => {\r",
+									"pm.test('Body mit Fehlermeldung', () => {\r",
 									"    const body = pm.response.json();\r",
-									"    const { token } = body.data.login;\r",
-									"    pm.expect(token).to.be.a('string').that.matches(/.+\\..+\\..+/u);\r",
+									"    const { errors } = body;\r",
+									"    pm.expect(errors).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    const error = errors[0];\r",
+									"    const { message, path, extensions } = error;\r",
+									"    pm.expect(message).to.be.a('string').that.includes('Passwort');\r",
+									"    pm.expect(path).to.be.an('array').that.has.a.lengthOf(1);\r",
+									"    pm.expect(path[0]).to.be.equal('login');\r",
+									"    pm.expect(extensions.code).to.be.equal('BAD_USER_INPUT');\r",
 									"});"
 								],
 								"type": "text/javascript"
