@@ -6,7 +6,7 @@
    3. `git rebase origin/main`
 
 - [ ] **Formatiert mit Prettier?**
-  - Führe aus: `npm run prettier`
+- Führe aus: `npm run prettier`
 
 - [ ] **Formatiert mit ESLint?**
 - Führe aus: `npm run eslint`
