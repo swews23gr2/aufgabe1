@@ -8,14 +8,14 @@ services:
       - published: 5432
         target: 5432
     restart: unless-stopped
-    command:
-      - 'postgres'
-      - '-c'
-      - 'ssl=on'
-      - '-c'
-      - 'ssl_cert_file=/var/lib/postgresql/certificate.cer'
-      - '-c'
-      - 'ssl_key_file=/var/lib/postgresql/private-key.pem'
+    # command:
+    #   - 'postgres'
+    #   - '-c'
+    #   - 'ssl=on'
+    #   - '-c'
+    #   - 'ssl_cert_file=/var/lib/postgresql/certificate.cer'
+    #   - '-c'
+    #   - 'ssl_key_file=/var/lib/postgresql/private-key.pem'
     volumes:
       - type: bind
         source: C:/Zimmermann/volumes/postgres/data
@@ -30,11 +30,11 @@ services:
       - type: bind
         source: C:/Zimmermann/volumes/postgres/tls/private-key.pem
         target: /var/lib/postgresql/private-key.pem
-        read_only: true
+        # read_only: true
       - type: bind
         source: C:/Zimmermann/volumes/postgres/tls/certificate.cer
         target: /var/lib/postgresql/certificate.cer
-        read_only: true
+        # read_only: true
       - type: bind
         source: C:/Zimmermann/volumes/postgres/csv/student
         target: /csv
@@ -44,10 +44,10 @@ services:
         target: /sql
         read_only: true
     env_file: postgres.env
-    user: 'postgres:postgres'
-    security_opt:
-      - label:user:postgres
-      - no-new-privileges:true
+    # user: 'postgres:postgres'
+    # security_opt:
+    #   - label:user:postgres
+    #   - no-new-privileges:true
     hostname: postgres
     container_name: postgres
     healthcheck:
@@ -55,7 +55,7 @@ services:
       interval: 5s
       timeout: 2s
       start_period: 5s
-    cap_drop: [ALL]
+    # cap_drop: [ALL]
     deploy:
       resources:
         limits:
