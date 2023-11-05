@@ -13,13 +13,6 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
--- "Konzeption und Realisierung eines aktiven Datenbanksystems"
--- "Verteilte Komponenten und Datenbankanbindung"
--- "Design Patterns"
--- "Freiburger Chorbuch"
--- "Maschinelle Lernverfahren zur Behandlung von Bonitätsrisiken im Mobilfunkgeschäft"
--- "Software Pioneers"
-
 INSERT INTO student(id, version, vorname, nachname, geburstdatum, matrikel, email, studienfach, abschluss, homepage, erzeugt, aktualisiert) VALUES
     (1, 0, 'Oliver', 'Smith', '1995-07-12', 34921, 'john.doe@example.com', 'WIIB', 'BACHELOR', 'https://acme.at', '2022-02-01 00:00:00', '2022-02-01 00:00:00');
 INSERT INTO student(id, version, vorname, nachname, geburstdatum, matrikel, email, studienfach, abschluss, homepage, erzeugt, aktualisiert) VALUES
