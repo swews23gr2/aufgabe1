@@ -15,22 +15,22 @@ import {
     HttpStatus,
     Post,
     Res,
-    //UseGuards,
+    UseGuards,
     UseInterceptors,
 } from '@nestjs/common';
 import { DbPopulateService } from './db-populate.service.js';
-//import { JwtAuthGuard } from '../../security/auth/jwt/jwt-auth.guard.js';
+import { JwtAuthGuard } from '../../security/auth/jwt/jwt-auth.guard.js';
 import { Response } from 'express';
 import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.js';
-//import { RolesAllowed } from '../../security/auth/roles/roles-allowed.decorator.js';
-//import { RolesGuard } from '../../security/auth/roles/roles.guard.js';
+import { RolesAllowed } from '../../security/auth/roles/roles-allowed.decorator.js';
+import { RolesGuard } from '../../security/auth/roles/roles.guard.js';
 
 /**
  * Die Controller-Klasse für die Entwicklung, z.B. Neuladen der DB.
  */
 @Controller('dev')
-//@UseGuards(JwtAuthGuard, RolesGuard)
-//@RolesAllowed('admin')
+@UseGuards(JwtAuthGuard, RolesGuard)
+@RolesAllowed('admin')
 @UseInterceptors(ResponseTimeInterceptor)
 @ApiTags('Dev')
 export class DevController {
