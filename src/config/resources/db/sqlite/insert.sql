@@ -13,52 +13,45 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
--- "Konzeption und Realisierung eines aktiven Datenbanksystems"
--- "Verteilte Komponenten und Datenbankanbindung"
--- "Design Patterns"
--- "Freiburger Chorbuch"
--- "Maschinelle Lernverfahren zur Behandlung von Bonitätsrisiken im Mobilfunkgeschäft"
--- "Software Pioneers"
+INSERT INTO student(id, version, vorname, nachname, geburstdatum, matrikel, email, studienfach, abschluss, homepage, erzeugt, aktualisiert) VALUES
+    (1, 0, 'Oliver', 'Smith', '1995-07-12', 34921, 'john.doe@example.com', 'WIIB', 'BACHELOR', 'https://acme.at', '2022-02-01 00:00:00', '2022-02-01 00:00:00');
+INSERT INTO student(id, version, vorname, nachname, geburstdatum, matrikel, email, studienfach, abschluss, homepage, erzeugt, aktualisiert) VALUES
+    (20, 0, 'Emma', 'Johnson', '1988-11-26', 76845, 'alice.smith@example.org', 'IB', 'BACHELOR', 'https://acme.biz', '2022-02-02 00:00:00', '2022-02-02 00:00:00');
+INSERT INTO student(id, version, vorname, nachname, geburstdatum, matrikel, email, studienfach, abschluss, homepage, erzeugt, aktualisiert) VALUES
+    (30, 0, 'Liam', 'Williams', '2000-03-04', 12357, 'mike.jones@example.net', 'MIB', 'MASTER', 'https://acme.com', '2022-02-03 00:00:00','2022-02-03 00:00:00');
+INSERT INTO student(id, version, vorname, nachname, geburstdatum, matrikel, email, studienfach, abschluss, homepage, erzeugt, aktualisiert) VALUES
+    (40, 0, 'Ava', 'Davis', '1979-09-18', 98652, 'emily.wilson@example.com', 'WIIM', 'MASTER', 'https://acme.de', '2022-02-04 00:00:00', '2022-02-04 00:00:00');
+INSERT INTO student(id, version, vorname, nachname, geburstdatum, matrikel, email, studienfach, abschluss, homepage, erzeugt, aktualisiert) VALUES
+    (50, 0, 'Noah', 'Wilson', '1992-05-30', 54389, 'sarah.brown@example.biz', 'IM', 'BACHELOR', 'https://acme.es', '2022-02-05 00:00:00', '2022-02-05 00:00:00');
+INSERT INTO student(id, version, vorname, nachname, geburstdatum, matrikel, email, studienfach, abschluss, homepage, erzeugt, aktualisiert) VALUES
+    (60, 0, 'Sophia', 'Anderson', '1985-12-09', 21574, 'david.clark@example.info', 'WIWM', 'MASTER', 'https://acme.it', '2022-02-06 00:00:00', '2022-02-06 00:00:00');
 
-INSERT INTO buch(id, version, isbn, rating, art, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
-    (1,0,'978-3-897-22583-1',4,'DRUCKAUSGABE',11.1,0.011,true,'2022-02-01','https://acme.at','JAVASCRIPT','2022-02-01 00:00:00','2022-02-01 00:00:00');
-INSERT INTO buch(id, version, isbn, rating, art, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
-    (20,0,'978-3-827-31552-6',2,'KINDLE',22.2,0.022,true,'2022-02-02','https://acme.biz','TYPESCRIPT','2022-02-02 00:00:00','2022-02-02 00:00:00');
-INSERT INTO buch(id, version, isbn, rating, art, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
-    (30,0,'978-0-201-63361-0',3,'DRUCKAUSGABE',33.3,0.033,true,'2022-02-03','https://acme.com','JAVASCRIPT,TYPESCRIPT','2022-02-03 00:00:00','2022-02-03 00:00:00');
-INSERT INTO buch(id, version, isbn, rating, art, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
-    (40,0,'978-0-007-09732-6',4,'DRUCKAUSGABE',44.4,0.044,true,'2022-02-04','https://acme.de',null,'2022-02-04 00:00:00','2022-02-04 00:00:00');
-INSERT INTO buch(id, version, isbn, rating, art, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
-    (50,0,'978-3-824-40481-0',2,'KINDLE',55.5,0.055,true,'2022-02-05','https://acme.es','TYPESCRIPT','2022-02-05 00:00:00','2022-02-05 00:00:00');
-INSERT INTO buch(id, version, isbn, rating, art, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
-    (60,0,'978-3-540-43081-0',1,'KINDLE',66.6,0.066,true,'2022-02-06','https://acme.fi','TYPESCRIPT','2022-02-06 00:00:00','2022-02-06 00:00:00');
+INSERT INTO adresse(id, ort, plz, land, student_id) VALUES
+    (1, 'New York', 12345, 'USA', 20);
+INSERT INTO adresse(id, ort, plz, land, student_id) VALUES
+    (20, 'Los Angeles', 45678, 'USA', 30);
+INSERT INTO adresse(id, ort, plz, land, student_id) VALUES
+    (30, 'Karlsruhe', 78912, 'GERMANY', 40);
+INSERT INTO adresse(id, ort, plz, land, student_id) VALUES
+    (40, 'Ontario', 10112, 'CANADA', 50);
+INSERT INTO adresse(id, ort, plz, land, student_id) VALUES
+    (50, 'Heidelberg', 24645, 'GERMANY', 60);
+INSERT INTO adresse(id, ort, plz, land, student_id) VALUES
+    (60, 'Quebec', 98555, 'CANADA', 1);
 
-INSERT INTO titel(id, titel, untertitel, buch_id) VALUES
-    (1,'Alpha','alpha',1);
-INSERT INTO titel(id, titel, untertitel, buch_id) VALUES
-    (20,'Beta',null,20);
-INSERT INTO titel(id, titel, untertitel, buch_id) VALUES
-    (30,'Gamma','gamma',30);
-INSERT INTO titel(id, titel, untertitel, buch_id) VALUES
-    (40,'Delta','delta',40);
-INSERT INTO titel(id, titel, untertitel, buch_id) VALUES
-    (50,'Epsilon','epsilon',50);
-INSERT INTO titel(id, titel, untertitel, buch_id) VALUES
-    (60,'Phi','phi',60);
-
-INSERT INTO abbildung(id, beschriftung, content_type, buch_id) VALUES
-    (1,'Abb. 1','img/png',1);
-INSERT INTO abbildung(id, beschriftung, content_type, buch_id) VALUES
-    (20,'Abb. 1','img/png',20);
-INSERT INTO abbildung(id, beschriftung, content_type, buch_id) VALUES
-    (21,'Abb. 2','img/png',20);
-INSERT INTO abbildung(id, beschriftung, content_type, buch_id) VALUES
-    (30,'Abb. 1','img/png',30);
-INSERT INTO abbildung(id, beschriftung, content_type, buch_id) VALUES
-    (31,'Abb. 2','img/png',30);
-INSERT INTO abbildung(id, beschriftung, content_type, buch_id) VALUES
-    (40,'Abb. 1','img/png',40);
-INSERT INTO abbildung(id, beschriftung, content_type, buch_id) VALUES
-    (50,'Abb. 1','img/png',50);
-INSERT INTO abbildung(id, beschriftung, content_type, buch_id) VALUES
-    (60,'Abb. 1','img/png',60);
+INSERT INTO fach(id, name, abkuerzung, student_id) VALUES
+    (1, 'Mathematik 2', 'Mathe 2', 1);
+INSERT INTO fach(id, name, abkuerzung, student_id) VALUES
+    (20,'Anwendungsprojekt','AWP',20);
+INSERT INTO fach(id, name, abkuerzung, student_id) VALUES
+    (21,'Programmieren 2','Prog 2',30);
+INSERT INTO fach(id, name, abkuerzung, student_id) VALUES
+    (30,'Softwarearchitektur','SWA',30);
+INSERT INTO fach(id, name, abkuerzung, student_id) VALUES
+    (31,'Softwareengeneering','SWE',40);
+INSERT INTO fach(id, name, abkuerzung, student_id) VALUES
+    (40,'Kommunikationssysteme','KS',50);
+INSERT INTO fach(id, name, abkuerzung, student_id) VALUES
+    (50,'Produktionsorganisation','ProdOrg',50);
+INSERT INTO fach(id, name, abkuerzung, student_id) VALUES
+    (60,'Automatisierung von Geschäftsprozessen','AVG',60);

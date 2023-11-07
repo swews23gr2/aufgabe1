@@ -24,35 +24,35 @@
 -- https://sqlite.org/lang_createindex.html
 -- https://stackoverflow.com/questions/37619526/how-can-i-change-the-default-sqlite-timezone
 
-CREATE TABLE IF NOT EXISTS buch (
+CREATE TABLE IF NOT EXISTS student (
     id             INTEGER PRIMARY KEY AUTOINCREMENT,
     version        INTEGER NOT NULL DEFAULT 0,
-    isbn           TEXT NOT NULL UNIQUE,
-    rating         INTEGER NOT NULL CHECK (rating >= 0 AND rating <= 5),
-    art            TEXT,
-    preis          REAL,
-    rabatt         REAL,
-    lieferbar      INTEGER NOT NULL CHECK (lieferbar = 0 OR lieferbar = 1) DEFAULT 0,
-    datum          TEXT,
+    vorname        TEXT NOT NULL,
+    nachname       TEXT NOT NULL,
+    geburstdatum   TEXT,
+    matrikel       INTEGER NOT NULL,
+    email          TEXT,
+    studienfach    TEXT,
+    abschluss      TEXT CHECK (abschluss == 'BACHELOR' or abschluss == 'MASTER'),
     homepage       TEXT,
-    schlagwoerter  TEXT,
     erzeugt        TEXT NOT NULL,
     aktualisiert   TEXT NOT NULL
 );
-CREATE INDEX IF NOT EXISTS buch_isbn_idx ON buch(isbn);
+CREATE INDEX IF NOT EXISTS student_matrikel_idx ON student(matrikel);
 
-CREATE TABLE IF NOT EXISTS titel (
+CREATE TABLE IF NOT EXISTS adresse (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
-    titel       TEXT NOT NULL,
-    untertitel  TEXT,
-    buch_id     INTEGER NOT NULL UNIQUE REFERENCES buch
+    ort         TEXT,
+    plz         TEXT,
+    land        TEXT,
+    student_id  INTEGER NOT NULL UNIQUE REFERENCES student
 );
 
 
-CREATE TABLE IF NOT EXISTS abbildung (
+CREATE TABLE IF NOT EXISTS fach (
     id              INTEGER PRIMARY KEY AUTOINCREMENT,
-    beschriftung    TEXT NOT NULL,
-    content_type    TEXT NOT NULL,
-    buch_id         INTEGER NOT NULL REFERENCES buch
+    name            TEXT NOT NULL,
+    abkuerzung      TEXT NOT NULL,
+    student_id      INTEGER NOT NULL REFERENCES student
 );
-CREATE INDEX IF NOT EXISTS abbildung_buch_id_idx ON abbildung(buch_id);
+CREATE INDEX IF NOT EXISTS fach_student_id_idx ON fach(student_id);
