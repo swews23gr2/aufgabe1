@@ -1,0 +1,72 @@
+@startuml Controller-Klasse
+
+interface Promise<T>
+
+package @nestjs/graphql {
+  class "@Resolver" as Resolver
+  hide Resolver circle
+
+  class "@UseGuards" as UseGuards
+  hide UseGuards circle
+
+  class "@UseInterceptors" as UseInterceptors
+  hide UseInterceptors circle
+
+  class "@Mutation" as Mutation
+  hide Mutation circle
+
+  class "@Args" as Args
+  hide Args circle
+}
+
+package security.auth {
+  class "type Role = 'ADMIN' | 'FACHABTEILUNG' | 'STUDENT'" as Role
+  hide Role circle
+
+  class "@Roles" as Roles
+  hide Roles circle
+
+  Roles .right.> Role
+}
+
+package student #DDDDDD {
+  package entity #FFFFFF {
+    class Student <<entity>>
+  }
+
+  package service #FFFFFF {
+    class StudentWriteService << control >>
+  }
+
+  class "type StudentDTO = Omit<Student, 'faecher' | 'aktualisiert' | 'erzeugt'" as StudentDTO
+  hide StudentDTO circle
+
+    interface IdInput {
+        id: number
+    }
+
+  class StudentMutationResolver << control >> << @Resolver() >> << @UseGuards() >> << @UseInterceptors() >> {
+    + @Mutation() @Roles() async create(@Args() studentDTO: StudentDTO): Promise<number>
+    + @Mutation() @Roles() async update(@Args() studentDTO: StudentDTO): Promise<number>
+    + @Mutation() @Roles() async delete(@Args() id: IdInput): Promise<boolean>
+  }
+
+  StudentMutationResolver o-down-> "1" StudentWriteService : service
+
+  StudentMutationResolver ..> Student
+  StudentMutationResolver ..> StudentDTO
+  StudentMutationResolver ..> IdInput
+  StudentDTO .up.> Student
+  StudentMutationResolver ..> Promise
+  StudentMutationResolver ..> Resolver
+
+  StudentMutationResolver .up.> Roles
+  StudentMutationResolver .up.> Role
+
+  StudentDTO .[hidden].> Promise
+  StudentDTO .[hidden].> Resolver
+}
+
+hide empty members
+
+@enduml

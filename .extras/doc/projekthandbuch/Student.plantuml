@@ -1,0 +1,61 @@
+@startuml Entity
+
+package typeorm {
+  class "@Entity" as Entity
+  hide Entity circle
+  class "@Column" as Column
+  hide Column circle
+  class "@PrimaryColumn" as PrimaryColumn
+  hide PrimaryColumn circle
+  class "@OneToMany" as OneToMany
+  hide OneToMany circle
+  class "@JoinColumn" as JoinColumn
+  hide JoinColumn circle
+  class "@ManyToOne" as ManyToOne
+  hide ManyToOne circle
+  class "@CreateDateColumn" as CreateDateColumn
+  hide CreateDateColumn circle
+  class "@UpdateDateColumn" as UpdateDateColumn
+  hide UpdateDateColumn circle
+}
+
+package student.entity {
+  class "type Abschluss = 'BACHELOR' | 'MASTER'" as Abschluss
+  hide Abschluss circle
+
+  class Student <<entity>> <<@Entity>> {
+    @Column() @PrimaryColumn() readonly id: number
+    @Column() readonly version: number
+    @Column() readonly vorname: string
+    @Column() readonly nachname: string
+    @Column() readonly geburtsdatum: Date
+    @Column() readonly matrikel: number
+    @Column() readonly email: string
+    @Column() readonly abschluss: Abschluss
+    @CreateDateColumn() readonly erzeugt: Date
+    @UpdateDateColumn() readonly aktualisiert: Date
+  }
+
+  class Adresse <<entity>> <<@Entity>> {
+    @Column() @PrimaryColumn() readonly id: number
+    @Column() readonly ort: string
+    @Column() readonly plz: string
+    @Column() readonly land: string
+  }
+
+  class Fach <<entity>> <<@Entity>> {
+    @Column() @PrimaryColumn() readonly id: number
+    @Column() readonly name: string
+    @Column() readonly abkuerzung: string
+  }
+
+  Student *--> "1" Adresse : @OneToOne() \nadresse
+  Student *--> "*" Fach : @OneToMany() \nfächer
+
+  Student .right.> Entity
+  Student .right.> Abschluss
+}
+
+hide empty members
+
+@enduml
