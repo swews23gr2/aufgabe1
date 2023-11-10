@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-# Aufruf:   docker buildx build --sbom true --tag juergenzimmermann/buch:2023.10.0-distroless .
+# Aufruf:   docker buildx build --sbom true --tag swews23gr2/student:2023.10.0-distroless .
 #               ggf. --progress=plain
 #               ggf. --no-cache
 #           Get-Content Dockerfile | docker run --rm --interactive hadolint/hadolint:2.12.1-beta-debian
@@ -39,7 +39,7 @@
 # ---------------------------------------------------------------------------------------
 # S t a g e   b u i l d e r
 # ---------------------------------------------------------------------------------------
-ARG NODE_VERSION=20.7.0
+ARG NODE_VERSION=20.9.0
 FROM node:${NODE_VERSION}-bookworm AS builder
 
 WORKDIR /home/node
@@ -54,6 +54,10 @@ COPY src ./src
 # apt-get install --no-install-recommends --yes python3.11-minimal=3.11.2-6 python3.11-dev=3.11.2-6 build-essential=12.9
 
 RUN npm i -g --no-audit --no-fund npm
+# RUN <<EOF
+# npm i -g --no-audit --no-fund npm
+# chmod 666 package*.json
+# EOF
 
 USER node
 
@@ -114,15 +118,13 @@ FROM gcr.io/distroless/nodejs20-debian12:nonroot
 # https://specs.opencontainers.org/image-spec/annotations
 # https://spdx.org/licenses
 # MAINTAINER ist deprecated https://docs.docker.com/engine/reference/builder/#maintainer-deprecated
-LABEL org.opencontainers.image.title="buch" \
-    org.opencontainers.image.description="Appserver buch mit distroless-Image" \
+LABEL org.opencontainers.image.title="student" \
+    org.opencontainers.image.description="Appserver student mit distroless-Image" \
     org.opencontainers.image.version="2023.10.0-distroless" \
     org.opencontainers.image.licenses="GPL-3.0-or-later" \
-    org.opencontainers.image.authors="Juergen.Zimmermann@h-ka.de"
+    org.opencontainers.image.authors="swews23gr2"
 
-WORKDIR /home/nonroot
-
-USER nonroot
+WORKDIR /opt/app
 
 COPY --chown=nonroot:nonroot package.json .env ./
 COPY --from=deps --chown=nonroot:nonroot /home/node/node_modules ./node_modules
@@ -130,6 +132,7 @@ COPY --from=builder --chown=nonroot:nonroot /home/node/dist ./dist
 COPY --chown=nonroot:nonroot src/config/resources ./dist/config/resources
 COPY --from=dumb-init /usr/bin/dumb-init /usr/bin/dumb-init
 
+USER nonroot
 EXPOSE 3000
 
 # Bei CMD statt ENTRYPOINT kann das Kommando bei "docker run ..." ueberschrieben werden
