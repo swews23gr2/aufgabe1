@@ -1,0 +1,40 @@
+@startuml ER Diagramm
+
+hide circle
+
+skinparam linetype ortho
+
+entity "Student" {
+  * id: integer <<generated>>
+  --
+  * version: integer
+  * vorname: text
+  * nachname: text
+  * geburtsdatum: date
+  * matrikel: number
+    homepage: text
+  * **adresse_id**: integer <<FK>>
+  * erzeugt: timestamp
+  * aktualisiert: timestamp
+}
+
+entity "Adresse" {
+  * id: integer <<generated>>
+  --
+  * ort: text
+  * plz: text
+  * land: text
+}
+
+entity "Fach" {
+  * id: integer <<generated>>
+  --
+  * name: text
+    abkuerzung: text
+  * **student_id**: integer <<FK>>
+}
+
+Student ||..|| Adresse
+Student ||..o{ Fach
+
+@enduml

@@ -1,0 +1,66 @@
+@startuml Anwendungskern
+
+interface Promise<T>
+
+package @nestjs/common {
+  class "@Injectable" as Injectable
+  hide Injectable circle
+}
+
+package typeorm {
+  class Repository<T>
+}
+
+package @nestjs/typeorm {
+  class "@InjectRepository" as InjectRepository
+  hide InjectRepository circle
+}
+
+package mail {
+  class MailService
+}
+
+package student {
+  package entity {
+    class Student
+  }
+
+  package service #DDDDDD {
+    class StudentInvalid
+    class MatrikelExists
+    class VersionInvalid
+    class VersionOutdated
+
+    class StudentWriteService << control >> <<@Injectable()>> {
+      + async create(student: Student): Promise<string|StudentInvalid|MatrikelExists>
+      + async update(id: number, student: Student, version: string): Promise<number|StudentInvalid|MatrikelExists|VersionInvalid|VersionOutdated>
+      + async delete(id: number): Promise<boolean>
+    }
+
+    StudentWriteService o--> "1" StudentValidationService: validationService
+    StudentWriteService o--> "1" StudentReadService: readService
+    StudentWriteService o--> "1" Repository: @InjectRepository repo
+    StudentWriteService o--> "1" MailService: mailService
+
+    StudentWriteService .up.> Injectable
+    StudentWriteService .up.> InjectRepository
+
+    StudentWriteService .up.> Promise
+    StudentWriteService .up.> Student
+    StudentWriteService .up.> StudentInvalid
+    StudentWriteService .up.> MatrikelExists
+    StudentWriteService .up.> VersionInvalid
+    StudentWriteService .up.> VersionOutdated
+
+    Student .up[hidden].> Promise
+    Student .up[hidden].> Injectable
+    Student .up[hidden].> InjectRepository
+    MatrikelExists .up[hidden].> Student
+    StudentValidationService .[hidden].> Repository
+    StudentValidationService .[hidden].> MailService
+  }
+}
+
+hide empty members
+
+@enduml
