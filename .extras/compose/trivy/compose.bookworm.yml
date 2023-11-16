@@ -1,0 +1,3 @@
+services:
+  trivy:
+    command: [image, swews23gr2/student:2023.10.0-bookworm]
