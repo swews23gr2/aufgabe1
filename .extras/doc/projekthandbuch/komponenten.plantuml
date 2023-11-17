@@ -1,0 +1,59 @@
+@startuml Komponenten
+
+left to right direction
+
+actor RESTClient
+actor GraphQLClient
+
+node "Nest" {
+  [RequestLoggerMiddleware]
+
+  [StudentController]
+  [StudentResolver]
+
+  [StudentService]
+
+  [Repository<Student>]
+
+  [MailService]
+}
+
+
+cloud {
+    [TypeORM]
+}
+
+cloud {
+    [nodemailer]
+}
+
+database "DB student" {
+    [Tabelle student]
+    [Tabelle adresse]
+    [Tabelle fach]
+}
+
+node {
+    [Mailserver]
+}
+
+RESTClient ~~> [RequestLoggerMiddleware]
+GraphQLClient ~~> [RequestLoggerMiddleware]
+
+[RequestLoggerMiddleware] ~~> [StudentController]
+[RequestLoggerMiddleware] ~~> [StudentResolver]
+
+[StudentController] ..> [StudentService]
+[StudentResolver] ..> [StudentService]
+[StudentService] ..> [Repository<Student>]
+
+[Repository<Student>] ~~> [TypeORM]
+[TypeORM] ~~> [Tabelle student]
+[TypeORM] ~~> [Tabelle adresse]
+[TypeORM] ~~> [Tabelle fach]
+
+[StudentService] ..> [MailService]
+[MailService] ~~> [nodemailer]
+[nodemailer] ~~> [Mailserver]
+
+@enduml

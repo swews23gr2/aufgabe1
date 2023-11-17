@@ -1,0 +1,108 @@
+@startuml Controller-Klasse
+
+interface Promise<T>
+
+package @nestjs/common {
+  class "@Controller" as Controller
+  hide Controller circle
+
+  class "@UseGuards" as UseGuards
+  hide UseGuards circle
+
+  class "@UseInterceptors" as UseInterceptors
+  hide UseInterceptors circle
+
+  class "@Post" as Post
+  hide Post circle
+
+  class "@Put" as Put
+  hide Put circle
+
+  class "@Delete" as Delete
+  hide Delete circle
+
+  class "@Req" as Req
+  hide Req circle
+
+  class "@Res" as Res
+  hide Res circle
+
+  class "@Param" as Param
+  hide Param circle
+
+  class "@Body" as Body
+  hide Body circle
+
+  class "@Headers" as Headers
+  hide Headers circle
+
+  UseInterceptors .[hidden].> Post
+  UseInterceptors .[hidden].> Put
+  UseInterceptors .[hidden].> Delete
+
+  Post .[hidden].> Req
+  Post .[hidden].> Res
+  Post .[hidden].> Param
+  Post .[hidden].> Body
+  Post .[hidden].> Headers
+}
+
+package express {
+  class Request
+  class Response
+
+  Response .right[hidden].> Controller
+}
+
+package security.auth {
+  class "type Role = 'ADMIN' | 'FACHABTEILUNG' | 'STUDENT'" as Role
+  hide Role circle
+
+  class "@Roles" as Roles
+  hide Roles circle
+
+  Roles .right.> Role
+}
+
+package student {
+  package entity #FFFFFF {
+    class Student <<entity>>
+
+    Student .[hidden].> Promise
+    Student .[hidden].> Request
+  }
+
+  package service {
+    class StudentWriteService << control >>
+    class StudentReadService << control >>
+  }
+
+  package rest #DDDDDD {
+    class StudentWriteController << control >> << @Controller() >> << @UseGuards() >> << @UseInterceptors() >> {
+      + @Post() @Roles() async post(@Body() student: Student, @Req() req: Request,  @Res() res: Response): Promise<Response>
+      + @Put() @Roles() async put(@Body() student: Student, @Param() id: number, @Headers() version: string, @Res() res: Response): Promise<Response>
+      + @Delete() @Roles() async delete(@Param() id: number, @Res() res: Response): Promise<Response>
+    }
+
+    StudentWriteController o--> "1" StudentWriteService : service
+    StudentWriteController o--> "1" StudentReadService : readService
+    StudentWriteController ..up> Student
+
+    StudentWriteController ..> Controller
+
+    StudentWriteController .up.> Roles
+    StudentWriteController .up.> Role
+
+    StudentWriteController ..> Request
+    StudentWriteController ..> Response
+    StudentWriteController ..> Promise
+
+    Student .up[hidden].> Roles
+    StudentWriteService .[hidden].> Request
+    StudentWriteService .[hidden].> Promise
+  }
+}
+
+hide empty members
+
+@enduml

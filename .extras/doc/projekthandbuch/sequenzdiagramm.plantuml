@@ -1,0 +1,13 @@
+@startuml Sequenzdiagramm
+
+actor Student
+
+boundary StudentGetController
+control StudentReadService
+database student
+
+Student -> StudentGetController : GET / getById()
+StudentGetController -> StudentReadService: findById()
+StudentReadService -> student: [TypeORM]
+
+@enduml

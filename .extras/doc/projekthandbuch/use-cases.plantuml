@@ -1,0 +1,18 @@
+@startuml Use Cases
+
+actor Student
+actor Admin
+actor Fachabteilung
+
+rectangle student {
+    Student --> (Student suchen)
+    Admin --> (Student suchen)
+    Admin --> (Student anlegen)
+    Admin --> (Student ändern)
+    Admin --> (Student löschen)
+    Fachabteilung --> (Student suchen)
+    Fachabteilung --> (Student anlegen)
+    Fachabteilung --> (Student ändern)
+}
+
+@enduml
