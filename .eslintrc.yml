@@ -274,7 +274,9 @@ rules:
   n/no-path-concat: error
   n/no-process-env: error
   n/no-process-exit: error
-  n/no-sync: error
+  n/no-sync: ['error', {
+            allowAtRootLevel: true,
+        }]
   n/no-unpublished-import: off
   n/prefer-global/buffer: error
   n/prefer-global/console: error

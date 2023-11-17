@@ -85,13 +85,13 @@ export class QueryBuilder {
             param[key] = (props as Record<string, any>)[key]; // eslint-disable-line @typescript-eslint/no-unsafe-assignment, security/detect-object-injection
             queryBuilder = useWhere
                 ? queryBuilder.where(
-                    `${this.#studentAlias}.${key} = :${key}`,
-                    param,
-                )
+                      `${this.#studentAlias}.${key} = :${key}`,
+                      param,
+                  )
                 : queryBuilder.andWhere(
-                    `${this.#studentAlias}.${key} = :${key}`,
-                    param,
-                );
+                      `${this.#studentAlias}.${key} = :${key}`,
+                      param,
+                  );
             useWhere = false;
         });
 
