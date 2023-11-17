@@ -92,11 +92,13 @@ export class DbPopulateService implements OnApplicationBootstrap {
     async #populatePostgres(basePath: string) {
         const dropScript = resolve(basePath, 'drop.sql');
         // https://nodejs.org/api/fs.html#fs_fs_readfilesync_path_options
+        // eslint-disable-next-line n/no-sync
         const dropStatements = readFileSync(dropScript, 'utf8'); // eslint-disable-line security/detect-non-literal-fs-filename
         await this.#datasource.query(dropStatements);
 
         const createScript = resolve(basePath, 'create.sql'); // eslint-disable-line sonarjs/no-duplicate-string
         // https://nodejs.org/api/fs.html#fs_fs_readfilesync_path_options
+        // eslint-disable-next-line n/no-sync
         const createStatements = readFileSync(createScript, 'utf8'); // eslint-disable-line security/detect-non-literal-fs-filename
         await this.#datasource.query(createStatements);
 
@@ -160,6 +162,7 @@ export class DbPopulateService implements OnApplicationBootstrap {
         // alternativ: https://nodejs.org/api/fs.html#fspromisesopenpath-flags-mode
         const statements: string[] = [];
         let statement = '';
+        // eslint-disable-next-line n/no-sync
         readFileSync(script, 'utf8') // eslint-disable-line security/detect-non-literal-fs-filename
             // bei Zeilenumbruch einen neuen String erstellen
             .split(/\r?\n/u)

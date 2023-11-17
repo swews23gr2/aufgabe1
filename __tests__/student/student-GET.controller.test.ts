@@ -76,7 +76,7 @@ describe('GET /rest', () => {
         studenten
             .map((student) => student._links.self.href)
             .forEach((selfLink) => {
-                // eslint-disable-next-line security/detect-non-literal-regexp, security-node/non-literal-reg-expr
+                // eslint-disable-next-line security/detect-non-literal-regexp, security-node/non-literal-reg-expr, regexp/sort-flags
                 expect(selfLink).toMatch(new RegExp(`^${baseURL}`, 'ui'));
             });
     });
