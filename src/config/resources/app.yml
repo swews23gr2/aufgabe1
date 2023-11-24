@@ -28,9 +28,10 @@
 # "better-sqlite3" erfordert Python zum Uebersetzen, wenn das Docker-Image gebaut wird
 
 db:
-  #type: postgres
+  
+  type: postgres
   #type: mysql
-  type: sqlite
+  #type: sqlite
 
   #host: localhost
 

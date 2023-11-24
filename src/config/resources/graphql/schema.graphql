@@ -41,7 +41,7 @@ type Student {
   version: Int!
   vorname: String
   nachname: String
-  geburstdatum: String
+  geburtsdatum: String
   matrikel: Int
   email: String
   studienfach: String
@@ -73,7 +73,7 @@ input FachInput {
 input StudentInput {
   vorname: String
   nachname: String
-  geburstdatum: String
+  geburtsdatum: String
   matrikel: Int
   email: String
   studienfach: String
@@ -93,7 +93,7 @@ input StudentUpdateInput {
   version: Int
   vorname: String
   nachname: String
-  geburstdatum: String
+  geburtsdatum: String
   matrikel: Int
   email: String
   studienfach: String

@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS student (
     version       integer NOT NULL DEFAULT 0,
     vorname       varchar(255),
     nachname       varchar(255),
-    geburstdatum  timestamp,
+    geburtsdatum  timestamp,
     matrikel      integer NOT NULL UNIQUE,
     email         varchar(255),
     studienfach   varchar(255),

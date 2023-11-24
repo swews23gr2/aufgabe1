@@ -73,7 +73,7 @@ describe('GraphQL Mutations', () => {
                   input: {
                     vorname: "Max",
                     nachname: "GraphQL",
-                    geburstdatum: "2022-01-31",
+                    geburtsdatum: "2022-01-31",
                     matrikel: 87299,
                     email: "max.graphql@example.de",
                     studienfach: "WIIB",
@@ -129,7 +129,7 @@ describe('GraphQL Mutations', () => {
                   input: {
                     vorname: "Colin",
                     nachname: "Williams",
-                    geburstdatum: "1-1-1",
+                    geburtsdatum: "1-1-1",
                     matrikel: 76845,
                     email: "falsche.email",
                     studienfach: "WIIB",
@@ -151,7 +151,7 @@ describe('GraphQL Mutations', () => {
             `,
         };
         const expectedMsg = [
-            expect.stringMatching(/^geburstdatum /u),
+            expect.stringMatching(/^geburtsdatum /u),
             expect.stringMatching(/^email /u),
             expect.stringMatching(/^homepage /u),
         ];
@@ -198,7 +198,7 @@ describe('GraphQL Mutations', () => {
                     input: {
                       vorname: "Max",
                         nachname: "GraphQL",
-                        geburstdatum: "2022-01-31",
+                        geburtsdatum: "2022-01-31",
                         matrikel: 87299,
                         email: "max.graphql@example.de",
                         studienfach: "WIIB",
@@ -259,7 +259,7 @@ describe('GraphQL Mutations', () => {
                     version: 0,
                     vorname: "Sophie",
                     nachname: "Williams"
-                    geburstdatum: "1999-12-11",
+                    geburtsdatum: "1999-12-11",
                     matrikel: 77656,
                     email: "sophie.graphql@example.de",
                     studienfach: "WIIB",
@@ -309,7 +309,7 @@ describe('GraphQL Mutations', () => {
                     version: 0,
                     vorname: "Sophie",
                     nachname: "Williams"
-                    geburstdatum: "1-1-1",
+                    geburtsdatum: "1-1-1",
                     matrikel: 77656,
                     email: "XY",
                     studienfach: "WIIB",
@@ -323,7 +323,7 @@ describe('GraphQL Mutations', () => {
             `,
         };
         const expectedMsg = [
-            expect.stringMatching(/^geburstdatum /u),
+            expect.stringMatching(/^geburtsdatum /u),
             expect.stringMatching(/^email /u),
             expect.stringMatching(/^homepage /u),
         ];
@@ -371,7 +371,7 @@ describe('GraphQL Mutations', () => {
                             version: 0,
                             vorname: "William",
                             nachname: "Johnson"
-                            geburstdatum: "1999-10-19",
+                            geburtsdatum: "1999-10-19",
                             matrikel: 77665,
                             email: "william.graphql@example.de",
                             studienfach: "WIIB",

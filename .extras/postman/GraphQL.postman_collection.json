@@ -232,7 +232,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "query ($ort: String = \"a\") {\r\n  studenten(ort: $ort) {\r\n    matrikel\r\n    vorname\r\n    nachname\r\n    adresse {\r\n        ort\r\n        plz\r\n        land\r\n    }\r\n  }\r\n}",
-								"variables": "{\r\n  \"titel\": \"ta\"\r\n}"
+								"variables": ""
 							}
 						},
 						"url": {
@@ -288,7 +288,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation {\r\n  create(\r\n    input: {\r\n      vorname: \"Max\",\r\n      nachname: \"GraphQL\",\r\n      geburstdatum: \"2022-01-31\",\r\n      matrikel: 87299,\r\n      email: \"max.graphql@example.de\",\r\n      studienfach: \"WIIB\",\r\n      abschluss: BACHELOR,\r\n      homepage: \"https://create-mutation.com\",\r\n      adresse: {\r\n        ort: \"Ortcreatemutation\",\r\n        plz: \"76133\"\r\n        land: \"GERMANY\"      },\r\n      fach: [{\r\n        name: \"Mathematik 2\",\r\n        abkuerzung: \"Mathe 2\"\r\n      }]\r\n    }\r\n   ) {\r\n      id\r\n    }\r\n}",
+								"query": "mutation {\r\n  create(\r\n    input: {\r\n      vorname: \"Max\",\r\n      nachname: \"GraphQL\",\r\n      geburtsdatum: \"2022-01-31\",\r\n      matrikel: 87299,\r\n      email: \"max.graphql@example.de\",\r\n      studienfach: \"WIIB\",\r\n      abschluss: BACHELOR,\r\n      homepage: \"https://create-mutation.com\",\r\n      adresse: {\r\n        ort: \"Ortcreatemutation\",\r\n        plz: \"76133\"\r\n        land: \"GERMANY\"      },\r\n      fach: [{\r\n        name: \"Mathematik 2\",\r\n        abkuerzung: \"Mathe 2\"\r\n      }]\r\n    }\r\n   ) {\r\n      id\r\n    }\r\n}",
 								"variables": ""
 							}
 						},
@@ -322,7 +322,7 @@
 									"    pm.expect(errors).to.be.an('array').that.has.a.lengthOf(1);\r",
 									"    const { message, path, extensions } = errors[0];\r",
 									"    pm.expect(message).to.be.a('string');\r",
-									"    const props = ['email', 'geburstdatum', 'homepage'];\r",
+									"    const props = ['email', 'geburtsdatum', 'homepage'];\r",
 									"    props.forEach(prop => pm.expect(message).to.include(prop));\r",
 									"    pm.expect(path).to.be.an('array').that.has.a.lengthOf(1);\r",
 									"    pm.expect(path[0]).to.be.equal('create');\r",
@@ -346,7 +346,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation {\r\n  create(\r\n    input: {\r\n      vorname: \"Colin\",\r\n      nachname: \"Williams\",\r\n      geburstdatum: \"1-1-1\",\r\n      matrikel: 76845,\r\n      email: \"falsche.email\",\r\n      studienfach: \"WIIB\",\r\n      abschluss: BACHELOR,\r\n      homepage: \"falsche-homepage\",\r\n      adresse: {\r\n        ort: \"Ortcreatemutation\",\r\n        plz: \"12345\"\r\n    land: \"GERMANY\"      },\r\n      fach: [{\r\n        name: \"Mathematik 2\",\r\n        abkuerzung: \"Mathe 2\"\r\n      }]\r\n    }\r\n  ) {\r\n      id\r\n  }\r\n}",
+								"query": "mutation {\r\n  create(\r\n    input: {\r\n      vorname: \"Colin\",\r\n      nachname: \"Williams\",\r\n      geburtsdatum: \"1-1-1\",\r\n      matrikel: 76845,\r\n      email: \"falsche.email\",\r\n      studienfach: \"WIIB\",\r\n      abschluss: BACHELOR,\r\n      homepage: \"falsche-homepage\",\r\n      adresse: {\r\n        ort: \"Ortcreatemutation\",\r\n        plz: \"12345\"\r\n    land: \"GERMANY\"      },\r\n      fach: [{\r\n        name: \"Mathematik 2\",\r\n        abkuerzung: \"Mathe 2\"\r\n      }]\r\n    }\r\n  ) {\r\n      id\r\n  }\r\n}",
 								"variables": ""
 							}
 						},
@@ -397,7 +397,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation {\r\n  update(\r\n    input: {\r\n      id: \"40\",\r\n      version: 0,\r\n      vorname: \"Sophie\",\r\n      nachname: \"Williams\"\r\n      geburstdatum: \"1999-12-11\",\r\n      matrikel: 77656,\r\n      email: \"sophie.graphql@example.de\",\r\n      studienfach: \"WIIB\",\r\n      abschluss: MASTER,\r\n      homepage: \"https://update.mutation.com\",\r\n    }\r\n  ) {\r\n      version\r\n  }\r\n}",
+								"query": "mutation {\r\n  update(\r\n    input: {\r\n      id: \"40\",\r\n      version: 0,\r\n      vorname: \"Sophie\",\r\n      nachname: \"Williams\"\r\n      geburtsdatum: \"1999-12-11\",\r\n      matrikel: 77656,\r\n      email: \"sophie.graphql@example.de\",\r\n      studienfach: \"WIIB\",\r\n      abschluss: MASTER,\r\n      homepage: \"https://update.mutation.com\",\r\n    }\r\n  ) {\r\n      version\r\n  }\r\n}",
 								"variables": ""
 							}
 						},
@@ -431,7 +431,7 @@
 									"    pm.expect(errors).to.be.an('array').that.has.a.lengthOf(1);\r",
 									"    const { message, path, extensions } = errors[0];\r",
 									"    pm.expect(message).to.be.a('string');\r",
-									"    const props = ['homepage', 'geburstdatum', 'email'];\r",
+									"    const props = ['homepage', 'geburtsdatum', 'email'];\r",
 									"    props.forEach(prop => pm.expect(message).to.include(prop));\r",
 									"    pm.expect(path).to.be.an('array').that.has.a.lengthOf(1);\r",
 									"    pm.expect(path[0]).to.be.equal('update');\r",
@@ -455,7 +455,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation {\r\n  update(\r\n    input: {\r\n      id: \"40\",\r\n      version: 0,\r\n      vorname: \"Sophie\",\r\n      nachname: \"Williams\"\r\n      geburstdatum: \"1-1-1\",\r\n      matrikel: 77656,\r\n      email: \"XY\",\r\n      studienfach: \"WIIB\",\r\n      abschluss: BACHELOR,\r\n      homepage: \"keinehomepage\",\r\n    }\r\n  ) {\r\n      version\r\n  }\r\n}",
+								"query": "mutation {\r\n  update(\r\n    input: {\r\n      id: \"40\",\r\n      version: 0,\r\n      vorname: \"Sophie\",\r\n      nachname: \"Williams\"\r\n      geburtsdatum: \"1-1-1\",\r\n      matrikel: 77656,\r\n      email: \"XY\",\r\n      studienfach: \"WIIB\",\r\n      abschluss: BACHELOR,\r\n      homepage: \"keinehomepage\",\r\n    }\r\n  ) {\r\n      version\r\n  }\r\n}",
 								"variables": ""
 							}
 						},
@@ -511,7 +511,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation {\r\n  update(\r\n    input: {\r\n      id: \"999999\",\r\n      version: 0,\r\n      vorname: \"William\",\r\n      nachname: \"Johnson\"\r\n      geburstdatum: \"1999-10-19\",\r\n      matrikel: 77665,\r\n      email: \"william.graphql@example.de\",\r\n      studienfach: \"WIIB\",\r\n      abschluss: BACHELOR,\r\n      homepage: \"https://update.mutation.com\"\r\n    }\r\n  ) {\r\n      version\r\n  }\r\n}",
+								"query": "mutation {\r\n  update(\r\n    input: {\r\n      id: \"999999\",\r\n      version: 0,\r\n      vorname: \"William\",\r\n      nachname: \"Johnson\"\r\n      geburtsdatum: \"1999-10-19\",\r\n      matrikel: 77665,\r\n      email: \"william.graphql@example.de\",\r\n      studienfach: \"WIIB\",\r\n      abschluss: BACHELOR,\r\n      homepage: \"https://update.mutation.com\"\r\n    }\r\n  ) {\r\n      version\r\n  }\r\n}",
 								"variables": ""
 							}
 						},
