@@ -1,7 +1,6 @@
 import { type Config } from '@jest/types';
 
 const jestConfig: Config.InitialOptions = {
-
     preset: 'ts-jest/presets/default-esm',
 
     extensionsToTreatAsEsm: ['.ts', '.mts', '.json'],
