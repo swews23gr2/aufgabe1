@@ -68,12 +68,12 @@ pipeline {
                 // Unterverzeichnisse src und test im WORKSPACE loeschen: vom letzten Build
                 // Kurzform fuer: sh([script: '...'])
                 //sh 'rm -rf src'
-                sh 'rm -rf __tests__'
-                sh 'rm -rf node_modules'
-                sh 'rm -rf dist'
-                sh 'rm -rf .extras/doc/api'
-                sh 'rm -rf .extras/doc/folien/folien.html'
-                sh 'rm -rf .extras/doc/projekthandbuch/html'
+//                 sh 'rm -rf __tests__'
+//                 sh 'rm -rf node_modules'
+//                 sh 'rm -rf dist'
+//                 sh 'rm -rf .extras/doc/api'
+//                 sh 'rm -rf .extras/doc/folien/folien.html'
+//                 sh 'rm -rf .extras/doc/projekthandbuch/html'
 
                 // https://www.jenkins.io/doc/pipeline/steps/git
                 // "named arguments" statt Funktionsaufruf mit Klammern
