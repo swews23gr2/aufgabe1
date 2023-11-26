@@ -3,7 +3,7 @@
 
 services:
   sonarqube:
-    image: sonarqube:10.2.1-community
+    image: sonarqube:10.3-community
     ports:
       # Port fuer HTTP
       - published: 9000
