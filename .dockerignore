@@ -7,11 +7,8 @@ __tests__
 .vscode
 coverage
 dist
-log
 node_modules
 scripts
-src/config/resources/jwt/private-key.pem
-src/config/resources/tls/private-key.pem
 .depcheckrc.yml
 .editorconfig
 .env.STUDENT
