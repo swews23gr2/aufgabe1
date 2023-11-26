@@ -77,7 +77,7 @@ pipeline {
 
                 // https://www.jenkins.io/doc/pipeline/steps/git
                 // "named arguments" statt Funktionsaufruf mit Klammern
-                git credentialsId: '39f212e9-ce1f-4064-86e0-70e32db93a91', url: 'git@github.com:swews23gr2/aufgabe1.git', branch: 'main', poll: true
+                //git credentialsId: '39f212e9-ce1f-4064-86e0-70e32db93a91', url: 'git@github.com:swews23gr2/aufgabe1.git', branch: 'main', poll: true
             }
         }
 
