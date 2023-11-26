@@ -67,7 +67,7 @@ pipeline {
 
                 // Unterverzeichnisse src und test im WORKSPACE loeschen: vom letzten Build
                 // Kurzform fuer: sh([script: '...'])
-                sh 'rm -rf src'
+                //sh 'rm -rf src'
                 sh 'rm -rf __tests__'
                 sh 'rm -rf node_modules'
                 sh 'rm -rf dist'
@@ -132,7 +132,7 @@ pipeline {
                 sh 'cat package.json'
 
                 // Konfigurationsverzeichnis /root/.npm
-                // sh 'npm ci --no-fund --no-audit'
+                sh 'npm ci --no-fund --no-audit'
             }
         }
 
