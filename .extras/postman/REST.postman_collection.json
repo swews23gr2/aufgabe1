@@ -1319,7 +1319,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"vorname\": \"Jane\",\r\n  \"nachname\": \"Doe\",\r\n  \"geburstdatum\": \"2000-01-01\",\r\n  \"matrikel\": \"62340\",\r\n  \"email\": \"jane.doe@post.resto\",\r\n  \"studienfach\": \"WIIB\",\r\n  \"abschluss\": \"BACHELOR\",\r\n  \"homepage\": \"https://post.rest\",\r\n  \"adresse\": {\r\n    \"ort\": \"POSTOrt\",\r\n    \"plz\": \"123\",\r\n    \"land\": \"USA\"\r\n  },\r\n  \"fach\": {\r\n    \"name\": \"Sofwarearchitektur\",\r\n    \"abkuerzung\": \"SWA\"\r\n  }\r\n}",
+							"raw": "{\r\n  \"vorname\": \"Jane\",\r\n  \"nachname\": \"Doe\",\r\n  \"geburtsdatum\": \"2000-01-01\",\r\n  \"matrikel\": \"62340\",\r\n  \"email\": \"jane.doe@post.resto\",\r\n  \"studienfach\": \"WIIB\",\r\n  \"abschluss\": \"BACHELOR\",\r\n  \"homepage\": \"https://post.rest\",\r\n  \"adresse\": {\r\n    \"ort\": \"POSTOrt\",\r\n    \"plz\": \"123\",\r\n    \"land\": \"USA\"\r\n  },\r\n  \"fach\": {\r\n    \"name\": \"Sofwarearchitektur\",\r\n    \"abkuerzung\": \"SWA\"\r\n  }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1372,7 +1372,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"vorname\": \"Email\",\r\n  \"nachname\": \"Vorhanden\",\r\n  \"geburstdatum\": \"2000-01-01\",\r\n  \"matrikel\": \"34921\",\r\n  \"email\": \"jane.doe@post.rest\",\r\n  \"studienfach\": \"WIIB\",\r\n  \"abschluss\": \"BACHELOR\",\r\n  \"homepage\": \"https://post.rest\",\r\n  \"adresse\": {\r\n    \"ort\": \"POSTOrt\",\r\n    \"plz\": \"123\",\r\n    \"land\": \"USA\"\r\n  },\r\n  \"fach\": [{\r\n    \"name\": \"Softwarearchitektur\",\r\n    \"abkuerzung\": \"SWA\"\r\n  }]\r\n}",
+							"raw": "{\r\n  \"vorname\": \"Email\",\r\n  \"nachname\": \"Vorhanden\",\r\n  \"geburtsdatum\": \"2000-01-01\",\r\n  \"matrikel\": \"34921\",\r\n  \"email\": \"jane.doe@post.rest\",\r\n  \"studienfach\": \"WIIB\",\r\n  \"abschluss\": \"BACHELOR\",\r\n  \"homepage\": \"https://post.rest\",\r\n  \"adresse\": {\r\n    \"ort\": \"POSTOrt\",\r\n    \"plz\": \"123\",\r\n    \"land\": \"USA\"\r\n  },\r\n  \"fach\": [{\r\n    \"name\": \"Softwarearchitektur\",\r\n    \"abkuerzung\": \"SWA\"\r\n  }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1406,7 +1406,7 @@
 									"pm.test('Fehlermeldungen im Response Body', () => {\r",
 									"    const body = pm.response.json();\r",
 									"    const { message } = body;\r",
-									"    const props = ['geburstdatum', 'email', 'homepage'];\r",
+									"    const props = ['geburtsdatum', 'email', 'homepage'];\r",
 									"    pm.expect(message).to.be.an('array').that.has.a.lengthOf(props.length);\r",
 									"    message.forEach(msg => pm.expect(msg).to.be.a('string').that.includes.oneOf(props));\r",
 									"});"
@@ -1427,7 +1427,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"vorname\": \"Max\",\r\n  \"nachname\": \"Mustermann\",\r\n  \"geburstdatum\": \"1-1-1\",\r\n  \"matrikel\": \"12345\",\r\n  \"email\": \"falsche.email\",\r\n  \"studienfach\": \"WIIB\",\r\n  \"abschluss\": \"BACHELOR\",\r\n  \"homepage\": \"falsche-homepage\",\r\n  \"adresse\": {\r\n    \"ort\": \"Karlsruhe\",\r\n    \"plz\": \"76133\",\r\n    \"land\": \"GERMANY\"\r\n  },\r\n  \"fach\": [{\r\n    \"name\": \"Softwarearchitektur\",\r\n    \"abkuerzung\": \"SWA\"\r\n  }]\r\n}",
+							"raw": "{\r\n  \"vorname\": \"Max\",\r\n  \"nachname\": \"Mustermann\",\r\n  \"geburtsdatum\": \"1-1-1\",\r\n  \"matrikel\": \"12345\",\r\n  \"email\": \"falsche.email\",\r\n  \"studienfach\": \"WIIB\",\r\n  \"abschluss\": \"BACHELOR\",\r\n  \"homepage\": \"falsche-homepage\",\r\n  \"adresse\": {\r\n    \"ort\": \"Karlsruhe\",\r\n    \"plz\": \"76133\",\r\n    \"land\": \"GERMANY\"\r\n  },\r\n  \"fach\": [{\r\n    \"name\": \"Softwarearchitektur\",\r\n    \"abkuerzung\": \"SWA\"\r\n  }]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1516,7 +1516,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"vorname\": \"Liam\",\r\n  \"nachname\": \"Williams\",\r\n  \"geburstdatum\": \"2000-01-01\",\r\n  \"matrikel\": \"12357\",\r\n  \"email\": \"liam.williams@example.com\",\r\n  \"studienfach\": \"WIIB\",\r\n  \"abschluss\": \"BACHELOR\",\r\n  \"homepage\": \"https://post.rest\"\r\n}",
+							"raw": "{\r\n  \"vorname\": \"Liam\",\r\n  \"nachname\": \"Williams\",\r\n  \"geburtsdatum\": \"2000-01-01\",\r\n  \"matrikel\": \"12357\",\r\n  \"email\": \"liam.williams@example.com\",\r\n  \"studienfach\": \"WIIB\",\r\n  \"abschluss\": \"BACHELOR\",\r\n  \"homepage\": \"https://post.rest\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1577,7 +1577,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"vorname\": \"Liam\",\r\n  \"nachname\": \"Williams\",\r\n  \"geburstdatum\": \"2000-01-01\",\r\n  \"matrikel\": \"12357\",\r\n  \"email\": \"liam.williams@example.com\",\r\n  \"studienfach\": \"WIIB\",\r\n  \"abschluss\": \"BACHELOR\",\r\n  \"homepage\": \"https://post.rest\"\r\n}",
+							"raw": "{\r\n  \"vorname\": \"Liam\",\r\n  \"nachname\": \"Williams\",\r\n  \"geburtsdatum\": \"2000-01-01\",\r\n  \"matrikel\": \"12357\",\r\n  \"email\": \"liam.williams@example.com\",\r\n  \"studienfach\": \"WIIB\",\r\n  \"abschluss\": \"BACHELOR\",\r\n  \"homepage\": \"https://post.rest\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1638,7 +1638,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"vorname\": \"Liam\",\r\n  \"nachname\": \"Williams\",\r\n  \"geburstdatum\": \"2000-01-01\",\r\n  \"matrikel\": \"12357\",\r\n  \"email\": \"liam.williams@example.com\",\r\n  \"studienfach\": \"WIIB\",\r\n  \"abschluss\": \"BACHELOR\",\r\n  \"homepage\": \"https://post.rest\"\r\n}",
+							"raw": "{\r\n  \"vorname\": \"Liam\",\r\n  \"nachname\": \"Williams\",\r\n  \"geburtsdatum\": \"2000-01-01\",\r\n  \"matrikel\": \"12357\",\r\n  \"email\": \"liam.williams@example.com\",\r\n  \"studienfach\": \"WIIB\",\r\n  \"abschluss\": \"BACHELOR\",\r\n  \"homepage\": \"https://post.rest\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1699,7 +1699,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"vorname\": \"Liam\",\r\n  \"nachname\": \"Williams\",\r\n  \"geburstdatum\": \"2000-01-01\",\r\n  \"matrikel\": \"12357\",\r\n  \"email\": \"liam.williams@example.com\",\r\n  \"studienfach\": \"WIIB\",\r\n  \"abschluss\": \"BACHELOR\",\r\n  \"homepage\": \"https://post.rest\"\r\n}",
+							"raw": "{\r\n  \"vorname\": \"Liam\",\r\n  \"nachname\": \"Williams\",\r\n  \"geburtsdatum\": \"2000-01-01\",\r\n  \"matrikel\": \"12357\",\r\n  \"email\": \"liam.williams@example.com\",\r\n  \"studienfach\": \"WIIB\",\r\n  \"abschluss\": \"BACHELOR\",\r\n  \"homepage\": \"https://post.rest\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1760,7 +1760,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"vorname\": \"Liam\",\r\n  \"nachname\": \"Williams\",\r\n  \"geburstdatum\": \"2000-01-01\",\r\n  \"matrikel\": \"12357\",\r\n  \"email\": \"liam.williams@example.com\",\r\n  \"studienfach\": \"WIIB\",\r\n  \"abschluss\": \"BACHELOR\",\r\n  \"homepage\": \"https://post.rest\"\r\n}",
+							"raw": "{\r\n  \"vorname\": \"Liam\",\r\n  \"nachname\": \"Williams\",\r\n  \"geburtsdatum\": \"2000-01-01\",\r\n  \"matrikel\": \"12357\",\r\n  \"email\": \"liam.williams@example.com\",\r\n  \"studienfach\": \"WIIB\",\r\n  \"abschluss\": \"BACHELOR\",\r\n  \"homepage\": \"https://post.rest\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1803,7 +1803,7 @@
 									"pm.test('Fehlermeldungen im Response Body', () => {\r",
 									"    const body = pm.response.json();\r",
 									"    const { message } = body;\r",
-									"    const props = ['geburstdatum', 'email', 'homepage'];\r",
+									"    const props = ['geburtsdatum', 'email', 'homepage'];\r",
 									"    pm.expect(message).to.be.an('array').that.has.a.lengthOf(props.length);\r",
 									"    message.forEach(msg => pm.expect(msg).to.be.a('string').that.includes.oneOf(props));\r",
 									"});"
@@ -1823,7 +1823,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"vorname\": \"Liam\",\r\n  \"nachname\": \"Williams\",\r\n  \"geburstdatum\": \"falsches-geburtsdatum\",\r\n  \"matrikel\": \"12357\",\r\n  \"email\": \"falsche-email\",\r\n  \"studienfach\": \"WIIB\",\r\n  \"abschluss\": \"BACHELOR\",\r\n  \"homepage\": \"falsche-homepage\"\r\n}",
+							"raw": "{\r\n  \"vorname\": \"Liam\",\r\n  \"nachname\": \"Williams\",\r\n  \"geburtsdatum\": \"falsches-geburtsdatum\",\r\n  \"matrikel\": \"12357\",\r\n  \"email\": \"falsche-email\",\r\n  \"studienfach\": \"WIIB\",\r\n  \"abschluss\": \"BACHELOR\",\r\n  \"homepage\": \"falsche-homepage\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

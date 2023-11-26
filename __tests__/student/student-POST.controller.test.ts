@@ -36,7 +36,7 @@ const neuerStudent: StudentDTO = {
     vorname: 'Sam',
     nachname: 'Test',
     abschluss: 'BACHELOR',
-    geburstdatum: '1999-11-27',
+    geburtsdatum: '1999-11-27',
     matrikel: 871,
     email: 'sample.test@example.com',
     studienfach: 'IIB',
@@ -57,7 +57,7 @@ const neuerStudentInvalid: Record<string, unknown> = {
     vorname: 'Sam',
     nachname: 'Test',
     abschluss: 'BACHELOR',
-    geburstdatum: '1-1-1',
+    geburtsdatum: '1-1-1',
     matrikel: 871,
     email: 'keine',
     studienfach: 'IIB',
@@ -78,7 +78,7 @@ const neuerStudentMatrikelExistiert: StudentDTO = {
     vorname: 'Sam',
     nachname: 'Test',
     abschluss: 'BACHELOR',
-    geburstdatum: '1999-11-27',
+    geburtsdatum: '1999-11-27',
     matrikel: 34_921,
     email: 'sample.test@example.com',
     studienfach: 'IIB',
@@ -161,7 +161,7 @@ describe('POST /rest', () => {
         const token = await loginRest(client);
         headers.Authorization = `Bearer ${token}`;
         const expectedMsg = [
-            expect.stringMatching(/^geburstdatum /u),
+            expect.stringMatching(/^geburtsdatum /u),
             expect.stringMatching(/^email /u),
             expect.stringMatching(/^homepage /u),
         ];

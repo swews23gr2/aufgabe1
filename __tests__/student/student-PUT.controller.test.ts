@@ -36,7 +36,7 @@ const geaenderterStudent: StudentDtoOhneRef = {
     vorname: 'Sam',
     nachname: 'Test',
     abschluss: 'BACHELOR',
-    geburstdatum: '1999-11-27',
+    geburtsdatum: '1999-11-27',
     matrikel: 871,
     email: 'sample.test@example.com',
     studienfach: 'IIB',
@@ -48,7 +48,7 @@ const geaenderterSTudentIdNichtVorhanden: StudentDtoOhneRef = {
     vorname: 'Sam',
     nachname: 'Test',
     abschluss: 'BACHELOR',
-    geburstdatum: '1999-11-28',
+    geburtsdatum: '1999-11-28',
     matrikel: 871,
     email: 'sample.test123@example.com',
     studienfach: 'IIB',
@@ -60,7 +60,7 @@ const geaenderterStudentInvalid: Record<string, unknown> = {
     vorname: 'Sam',
     nachname: 'Test',
     abschluss: 'BACHELOR',
-    geburstdatum: '1-1-1',
+    geburtsdatum: '1-1-1',
     matrikel: 871,
     email: 'Falsch',
     studienfach: 'IIB',
@@ -71,7 +71,7 @@ const veralterStudent: StudentDtoOhneRef = {
     vorname: 'Sam',
     nachname: 'Test',
     abschluss: 'BACHELOR',
-    geburstdatum: '1999-11-27',
+    geburtsdatum: '1999-11-27',
     matrikel: 871,
     email: 'sample.test@example.com',
     studienfach: 'IIB',
@@ -153,7 +153,7 @@ describe('PUT /rest/:id', () => {
         headers.Authorization = `Bearer ${token}`;
         headers['If-Match'] = '"0"';
         const expectedMsg = [
-            expect.stringMatching(/^geburstdatum /u),
+            expect.stringMatching(/^geburtsdatum /u),
             expect.stringMatching(/^email /u),
             expect.stringMatching(/^homepage /u),
         ];

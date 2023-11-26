@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS student (
     version        INTEGER NOT NULL DEFAULT 0,
     vorname        TEXT NOT NULL,
     nachname       TEXT NOT NULL,
-    geburstdatum   TEXT,
+    geburtsdatum   TEXT,
     matrikel       INTEGER NOT NULL,
     email          TEXT,
     studienfach    TEXT,

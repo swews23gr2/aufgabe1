@@ -13,17 +13,17 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-INSERT INTO student(id, version, vorname, nachname, geburstdatum, matrikel, email, studienfach, abschluss, homepage, erzeugt, aktualisiert) VALUES
+INSERT INTO student(id, version, vorname, nachname, geburtsdatum, matrikel, email, studienfach, abschluss, homepage, erzeugt, aktualisiert) VALUES
     (1, 0, 'Oliver', 'Smith', '1995-07-12', 34921, 'john.doe@example.com', 'WIIB', 'BACHELOR', 'https://acme.at', '2022-02-01 00:00:00', '2022-02-01 00:00:00');
-INSERT INTO student(id, version, vorname, nachname, geburstdatum, matrikel, email, studienfach, abschluss, homepage, erzeugt, aktualisiert) VALUES
+INSERT INTO student(id, version, vorname, nachname, geburtsdatum, matrikel, email, studienfach, abschluss, homepage, erzeugt, aktualisiert) VALUES
     (20, 0, 'Emma', 'Johnson', '1988-11-26', 76845, 'alice.smith@example.org', 'IB', 'BACHELOR', 'https://acme.biz', '2022-02-02 00:00:00', '2022-02-02 00:00:00');
-INSERT INTO student(id, version, vorname, nachname, geburstdatum, matrikel, email, studienfach, abschluss, homepage, erzeugt, aktualisiert) VALUES
+INSERT INTO student(id, version, vorname, nachname, geburtsdatum, matrikel, email, studienfach, abschluss, homepage, erzeugt, aktualisiert) VALUES
     (30, 0, 'Liam', 'Williams', '2000-03-04', 12357, 'mike.jones@example.net', 'MIB', 'MASTER', 'https://acme.com', '2022-02-03 00:00:00','2022-02-03 00:00:00');
-INSERT INTO student(id, version, vorname, nachname, geburstdatum, matrikel, email, studienfach, abschluss, homepage, erzeugt, aktualisiert) VALUES
+INSERT INTO student(id, version, vorname, nachname, geburtsdatum, matrikel, email, studienfach, abschluss, homepage, erzeugt, aktualisiert) VALUES
     (40, 0, 'Ava', 'Davis', '1979-09-18', 98652, 'emily.wilson@example.com', 'WIIM', 'MASTER', 'https://acme.de', '2022-02-04 00:00:00', '2022-02-04 00:00:00');
-INSERT INTO student(id, version, vorname, nachname, geburstdatum, matrikel, email, studienfach, abschluss, homepage, erzeugt, aktualisiert) VALUES
+INSERT INTO student(id, version, vorname, nachname, geburtsdatum, matrikel, email, studienfach, abschluss, homepage, erzeugt, aktualisiert) VALUES
     (50, 0, 'Noah', 'Wilson', '1992-05-30', 54389, 'sarah.brown@example.biz', 'IM', 'BACHELOR', 'https://acme.es', '2022-02-05 00:00:00', '2022-02-05 00:00:00');
-INSERT INTO student(id, version, vorname, nachname, geburstdatum, matrikel, email, studienfach, abschluss, homepage, erzeugt, aktualisiert) VALUES
+INSERT INTO student(id, version, vorname, nachname, geburtsdatum, matrikel, email, studienfach, abschluss, homepage, erzeugt, aktualisiert) VALUES
     (60, 0, 'Sophia', 'Anderson', '1985-12-09', 21574, 'david.clark@example.info', 'WIWM', 'MASTER', 'https://acme.it', '2022-02-06 00:00:00', '2022-02-06 00:00:00');
 
 INSERT INTO adresse(id, ort, plz, land, student_id) VALUES
